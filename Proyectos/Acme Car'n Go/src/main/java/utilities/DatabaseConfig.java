@@ -12,6 +12,6 @@ package utilities;
 
 public interface DatabaseConfig {
 
-	public final String	PersistenceUnit	= "acme-car-n-go";
+	public final String	PersistenceUnit	= "acme-cng";
 
 }

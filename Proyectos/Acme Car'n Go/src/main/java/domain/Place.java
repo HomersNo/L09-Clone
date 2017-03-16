@@ -36,7 +36,7 @@ public class Place extends DomainEntity {
 		return this.longitude;
 	}
 
-	public void setLongitude(final Double longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
@@ -45,7 +45,7 @@ public class Place extends DomainEntity {
 		return this.latitude;
 	}
 
-	public void setLatitude(final Double latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 

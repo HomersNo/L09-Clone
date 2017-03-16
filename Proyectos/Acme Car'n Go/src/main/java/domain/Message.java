@@ -71,8 +71,8 @@ public class Message extends DomainEntity {
 	// Relationships
 	
 	private Folder folder;
-	private UserAccount sender;
-	private UserAccount recipient;
+	private Actor sender;
+	private Actor recipient;
 
 	@Valid
 	@NotNull
@@ -88,10 +88,10 @@ public class Message extends DomainEntity {
 	@NotNull
 	@ManyToOne(optional =false)
 //	@NotFound(action = NotFoundAction.IGNORE)
-	public UserAccount getSender() {
+	public Actor getSender() {
 		return sender;
 	}
-	public void setSender(UserAccount sender) {
+	public void setSender(Actor sender) {
 		this.sender = sender;
 	}
 	
@@ -99,10 +99,10 @@ public class Message extends DomainEntity {
 	@NotNull
 	@ManyToOne(optional =false)
 //	@NotFound(action = NotFoundAction.IGNORE)
-	public UserAccount getRecipient() {
+	public Actor getRecipient() {
 		return recipient;
 	}
-	public void setRecipient(UserAccount recipient) {
+	public void setRecipient(Actor recipient) {
 		this.recipient = recipient;
 	}
 	

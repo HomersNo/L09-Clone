@@ -125,7 +125,6 @@ public class CustomerService {
 			result.setEmail(customer.getEmail());
 			result.setName(customer.getName());
 			result.setPhoneNumber(customer.getPhoneNumber());
-			result.setPicture(customer.getPicture());
 			result.setSurname(customer.getSurname());
 
 			this.validator.validate(result, binding);

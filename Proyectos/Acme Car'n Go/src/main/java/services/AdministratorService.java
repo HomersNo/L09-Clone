@@ -97,7 +97,6 @@ public class AdministratorService {
 			result.setEmail(administrator.getEmail());
 			result.setName(administrator.getName());
 			result.setPhoneNumber(administrator.getPhoneNumber());
-			result.setPicture(administrator.getPicture());
 			result.setSurname(administrator.getSurname());
 
 			this.validator.validate(result, binding);

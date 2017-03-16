@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -98,7 +99,7 @@ public class Post extends Commentable {
 	}
 
 	@Valid
-	@OneToOne()
+	@OneToOne(cascade = CascadeType.PERSIST)
 	public Place getOrigin() {
 		return this.origin;
 	}
@@ -107,7 +108,7 @@ public class Post extends Commentable {
 		this.origin = origin;
 	}
 	@Valid
-	@OneToOne()
+	@OneToOne(cascade = CascadeType.PERSIST)
 	public Place getDestination() {
 		return this.destination;
 	}

@@ -281,6 +281,7 @@
 		<property name="attachment" value="http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png" />
 		<property name="recipient" ref="admin1" />
 		<property name="sender" ref="admin2" />
+		<property name="folder" ref="outbox2" />
 	</bean>
 	
 		<bean id="message2" class="domain.Message">
@@ -350,38 +351,38 @@
 	
 	<bean id="place1" class="domain.Place">
 		<property name="address" value="Calle pocholo" />
-		<property name="latitude" value="0" />
-		<property name="longitude" value="0" />
+		<property name="latitude" value="0.0" />
+		<property name="longitude" value="0.0" />
 	</bean>
 	
 	<bean id="place2" class="domain.Place">
 		<property name="address" value="Calle pesadilla" />
-		<property name="latitude" value="10" />
-		<property name="longitude" value="80" />
+		<property name="latitude" value="10.0" />
+		<property name="longitude" value="80.0" />
 	</bean>
 	
 	<bean id="place3" class="domain.Place">
 		<property name="address" value="Calle barbacoa" />
-		<property name="latitude" value="-120" />
-		<property name="longitude" value="40" />
+		<property name="latitude" value="-120.0" />
+		<property name="longitude" value="40.0" />
 	</bean>
 	
 	<bean id="place4" class="domain.Place">
 		<property name="address" value="Calle patata" />
-		<property name="latitude" value="-10" />
-		<property name="longitude" value="10" />
+		<property name="latitude" value="-10.0" />
+		<property name="longitude" value="10.0" />
 	</bean>
 	
 	<bean id="place5" class="domain.Place">
 		<property name="address" value="Calle chorizo" />
-		<property name="latitude" value="0" />
-		<property name="longitude" value="-20" />
+		<property name="latitude" value="0.0" />
+		<property name="longitude" value="-20.0" />
 	</bean>
 	
 	<bean id="place6" class="domain.Place">
 		<property name="address" value="Calle melón" />
-		<property name="latitude" value="-20" />
-		<property name="longitude" value="0" />
+		<property name="latitude" value="-20.0" />
+		<property name="longitude" value="0.0" />
 	</bean>
 	
 	<bean id="place7" class="domain.Place">
@@ -404,7 +405,8 @@
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="type" value="REQUEST" />
 		<property name="banned" value="true" />
-		<property name="place" ref="place1" />
+		<property name="origin" ref="place2" />
+		<property name="destination" ref="place1" />
 		<property name="customer" ref="customer1" />
 	</bean>
 	
@@ -414,8 +416,9 @@
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="type" value="OFFER" />
 		<property name="banned" value="false" />
-		<property name="place" ref="place2" />
 		<property name="customer" ref="customer2" />
+		<property name="origin" ref="place1" />
+		<property name="destination" ref="place2" />
 	</bean>
 	
 	<bean id="post3" class="domain.Post">
@@ -424,8 +427,9 @@
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="type" value="REQUEST" />
 		<property name="banned" value="true" />
-		<property name="place" ref="place3" />
 		<property name="customer" ref="customer3" />
+		<property name="origin" ref="place1" />
+		<property name="destination" ref="place2" />
 	</bean>
 	
 	<bean id="post4" class="domain.Post">
@@ -434,7 +438,8 @@
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="type" value="OFFER" />
 		<property name="banned" value="false" />
-		<property name="place" ref="place4" />
+		<property name="origin" ref="place3" />
+		<property name="destination" ref="place4" />
 		<property name="customer" ref="customer4" />
 	</bean>
 	
@@ -444,7 +449,8 @@
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="type" value="REQUEST" />
 		<property name="banned" value="true" />
-		<property name="place" ref="place5" />
+		<property name="origin" ref="place4" />
+		<property name="destination" ref="place3" />
 		<property name="customer" ref="customer5" />
 	</bean>
 	
@@ -454,7 +460,8 @@
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="type" value="OFFER" />
 		<property name="banned" value="false" />
-		<property name="place" ref="place6" />
+		<property name="origin" ref="place5" />
+		<property name="destination" ref="place6" />
 		<property name="customer" ref="customer6" />
 	</bean>
 	
@@ -464,7 +471,8 @@
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="type" value="REQUEST" />
 		<property name="banned" value="false" />
-		<property name="place" ref="place7" />
+		<property name="origin" ref="place6" />
+		<property name="destination" ref="place7" />
 		<property name="customer" ref="customer2" />
 	</bean>
 	
@@ -474,7 +482,8 @@
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="type" value="OFFER" />
 		<property name="banned" value="true" />
-		<property name="place" ref="place8" />
+		<property name="origin" ref="place8" />
+		<property name="destination" ref="place7" />
 		<property name="customer" ref="customer4" />
 	</bean>
 	

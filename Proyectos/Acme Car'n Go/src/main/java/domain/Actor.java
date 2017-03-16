@@ -12,7 +12,6 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 
 import security.UserAccount;
 
@@ -33,7 +32,6 @@ public class Actor extends Commentable {
 	private String	surname;
 	private String	email;
 	private String	phoneNumber;
-	private String	picture;
 
 
 	@NotBlank
@@ -66,15 +64,6 @@ public class Actor extends Commentable {
 	}
 	public void setPhoneNumber(final String phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-
-	@NotBlank
-	@URL
-	public String getPicture() {
-		return this.picture;
-	}
-	public void setPicture(final String picture) {
-		this.picture = picture;
 	}
 
 

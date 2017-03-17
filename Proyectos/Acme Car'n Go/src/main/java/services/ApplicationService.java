@@ -27,6 +27,9 @@ public class ApplicationService {
 	@Autowired
 	private CustomerService			customerService;
 
+	@Autowired
+	private PostService				postService;
+
 
 	public Application create(final Post post) {
 		Application result;
@@ -51,6 +54,14 @@ public class ApplicationService {
 		Collection<Application> result;
 
 		result = this.applicationRepository.findAll();
+
+		return result;
+	}
+
+	public Collection<Application> findAllReceived(final int customerId) {
+		Collection<Application> result;
+
+		result = this.applicationRepository.findAllReceived(customerId);
 
 		return result;
 	}
@@ -97,4 +108,12 @@ public class ApplicationService {
 		this.applicationRepository.save(application);
 	}
 
+	public Application apply(final Post post) {
+		Application result;
+
+		result = this.create(post);
+		result.setStatus("PENDING");
+
+		return result;
+	}
 }

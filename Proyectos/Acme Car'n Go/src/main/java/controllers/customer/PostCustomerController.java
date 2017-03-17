@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CustomerService;
-import services.PlaceService;
 import services.PostService;
 import controllers.AbstractController;
 import domain.Post;
-import forms.FilterString;
 
 @Controller
 @RequestMapping("/post/customer")
@@ -33,42 +31,19 @@ public class PostCustomerController extends AbstractController {
 	private PostService		postService;
 
 	@Autowired
-	private PlaceService	placeService;
-
-	@Autowired
 	private CustomerService	customerService;
 
 
-	@RequestMapping(value = "/listRequests", method = RequestMethod.GET)
-	public ModelAndView listRequests() {
+	@RequestMapping(value = "/listOwn", method = RequestMethod.GET)
+	public ModelAndView listOwn() {
 		ModelAndView result;
 
-		Collection<Post> requests;
-		final FilterString filter = new FilterString();
+		Collection<Post> posts;
 
-		requests = this.postService.findAllRequests();
-
-		result = new ModelAndView("post/list");
-		result.addObject("requestURI", "post/customer/listRequests.do");
-		result.addObject("posts", requests);
-		result.addObject("filterString", filter);
-
-		return result;
-	}
-
-	@RequestMapping(value = "/listOffers", method = RequestMethod.GET)
-	public ModelAndView listOfferss() {
-		ModelAndView result;
-
-		Collection<Post> offers;
-		final FilterString filter = new FilterString();
-
-		offers = this.postService.findAllOffers();
+		posts = this.postService.findAllByCustomer(this.customerService.findByPrincipal());
 
 		result = new ModelAndView("post/list");
-		result.addObject("requestURI", "post/customer/listOffers.do");
-		result.addObject("posts", offers);
-		result.addObject("filterString", filter);
+		result.addObject("posts", posts);
 
 		return result;
 	}
@@ -147,29 +122,6 @@ public class PostCustomerController extends AbstractController {
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(post, "post.commit.error");
 		}
-
-		return result;
-	}
-
-	@RequestMapping(value = "/filter", method = RequestMethod.POST, params = "filterButton")
-	public ModelAndView filter(@Valid final FilterString filterString, final BindingResult binding) {
-
-		ModelAndView result;
-		Collection<Post> posts;
-		final String filter = filterString.getFilter();
-		if (binding.hasErrors())
-			result = new ModelAndView("redirect:list.do");
-		else
-			try {
-				posts = this.postService.findAllFiltered(filter);
-				result = new ModelAndView("post/list");
-				result.addObject("requestURI", "post/list.do");
-				result.addObject("posts", posts);
-				result.addObject("filterString", filterString);
-
-			} catch (final Throwable oops) {
-				result = new ModelAndView("redirect:list.do");
-			}
 
 		return result;
 	}

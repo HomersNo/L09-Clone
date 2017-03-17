@@ -36,7 +36,14 @@
 		<a href="customer/display.do?customerId=${row.customer.id}"> <jstl:out value="${row.customer.name} ${row.customer.surname}" /></a>
 	</display:column>
 	
-	<jstl:if test="${requestURI eq 'application/customer/listReceived.do' }"></jstl:if>
+	<jstl:if test="${requestURI eq 'application/customer/listReceived.do' and row.status eq 'PENDING'}">
+	<display:column>
+		<a href="application/customer/accept.do?applicationId=${row.id}"><spring:message code="application.accept"/></a>
+	</display:column>
+	<display:column>
+		<a href="application/customer/deny.do?applicationId=${row.id}"><spring:message code="application.deny"/></a>
+	</display:column>
+	</jstl:if>
 
 </display:table>
 

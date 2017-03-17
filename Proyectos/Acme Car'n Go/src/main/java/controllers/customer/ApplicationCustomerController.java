@@ -91,7 +91,7 @@ public class ApplicationCustomerController extends AbstractController {
 
 		this.applicationService.accept(application);
 
-		result = this.listApplications(0);
+		result = this.listApplications();
 
 		return result;
 	}
@@ -105,7 +105,7 @@ public class ApplicationCustomerController extends AbstractController {
 
 		this.applicationService.deny(application);
 
-		result = this.listApplications(0);
+		result = this.listApplications();
 
 		return result;
 	}

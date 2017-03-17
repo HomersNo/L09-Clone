@@ -16,19 +16,19 @@
        
 <tiles-definitions>
 
-	<definition name="customer/display" extends="master.page">	
-		<put-attribute name="title" value="Display of customer" />
-		<put-attribute name="body" value="/views/customer/display.jsp" />
+	<definition name="post/list" extends="master.page">	
+		<put-attribute name="title" value="List posts" />
+		<put-attribute name="body" value="/views/post/list.jsp" />
 	</definition>
 	
-	<definition name="customer/edit" extends="master.page">	
-		<put-attribute name="title" value="Edit customer" />
-		<put-attribute name="body" value="/views/customer/edit.jsp" />
+	<definition name="post/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit post" />
+		<put-attribute name="body" value="/views/post/edit.jsp" />
 	</definition>
 	
-	<definition name="customer/register" extends="master.page">	
-		<put-attribute name="title" value="Register customer" />
-		<put-attribute name="body" value="/views/customer/register.jsp" />
+	<definition name="post/display" extends="master.page">	
+		<put-attribute name="title" value="Display post" />
+		<put-attribute name="body" value="/views/post/display.jsp" />
 	</definition>
 	
 </tiles-definitions>

@@ -16,19 +16,20 @@
       
 <tiles-definitions>
 
-	<definition name="customer/display" extends="master.page">	
-		<put-attribute name="title" value="Perfil de cliente" />
-		<put-attribute name="body" value="/views/customer/display.jsp" />
+	<definition name="post/list" extends="master.page">	
+		<put-attribute name="title" value="Listar anuncios" />
+		<put-attribute name="body" value="/views/post/list.jsp" />
 	</definition>
 	
-	<definition name="customer/edit" extends="master.page">	
-		<put-attribute name="title" value="Editar cliente" />
-		<put-attribute name="body" value="/views/customer/edit.jsp" />
+	<definition name="post/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar anuncio" />
+		<put-attribute name="body" value="/views/post/edit.jsp" />
 	</definition>
 	
-	<definition name="customer/register" extends="master.page">	
-		<put-attribute name="title" value="Registrar cliente" />
-		<put-attribute name="body" value="/views/customer/register.jsp" />
+	<definition name="post/display" extends="master.page">	
+		<put-attribute name="title" value="Mostrar anuncio" />
+		<put-attribute name="body" value="/views/post/display.jsp" />
 	</definition>
+	
 	
 </tiles-definitions>

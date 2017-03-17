@@ -18,10 +18,38 @@
 	">
 
 	<util:list id="converters">
-		<!-- 
-			Add your own converters using entries of the following form: 
-			<bean class="converters.Class1ToClass2" /> 
-		-->
+		<bean class="converters.AuthorityToStringConverter" />
+		<bean class="converters.StringToAuthorityConverter" />
+		
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		
+		<bean class="converters.CommentToStringConverter" />
+		<bean class="converters.StringToCommentConverter" />
+		
+		<bean class="converters.CommentableToStringConverter" />
+		<bean class="converters.StringToCommentableConverter" />
+		
+		<bean class="converters.CustomerToStringConverter" />
+		<bean class="converters.StringToCustomerConverter" />
+		
+		<bean class="converters.FolderToStringConverter" />
+		<bean class="converters.StringToFolderConverter" />
+		
+		<bean class="converters.MessageToStringConverter" />
+		<bean class="converters.StringToMessageConverter" />
+				
+		<bean class="converters.PlaceToStringConverter" />
+		<bean class="converters.StringToPlaceConverter" />
+		
+		<bean class="converters.PostToStringConverter" />
+		<bean class="converters.StringToPostConverter" />
+		
+		<bean class="converters.SystemConfigurationToStringConverter" />
+		<bean class="converters.StringToSystemConfigurationConverter" />
 	</util:list>
 	
 </beans>

@@ -66,6 +66,30 @@ public class PostService {
 		return result;
 	}
 
+	public Collection<Post> findAllRequests() {
+		Collection<Post> result;
+
+		result = this.postRepository.findByType("REQUEST");
+
+		return result;
+	}
+
+	public Collection<Post> findAllOffers() {
+		Collection<Post> result;
+
+		result = this.postRepository.findByType("OFFER");
+
+		return result;
+	}
+
+	public Collection<Post> findAllFiltered(final String filter) {
+		Collection<Post> posts;
+
+		posts = this.postRepository.findAllFiltered(filter);
+
+		return posts;
+	}
+
 	public Post save(final Post post) {
 		Assert.notNull(post);
 		this.checkPrincipal(post);

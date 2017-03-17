@@ -123,7 +123,6 @@
 		<property name="surname" value="1" />
 		<property name="email" value="admin1@gmail.com" />
 		<property name="phoneNumber" value="1234" />
-		<property name="picture" value="http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png" />
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
 
@@ -132,7 +131,6 @@
 		<property name="surname" value="2" />
 		<property name="email" value="admin2@gmail.com" />
 		<property name="phoneNumber" value="2345" />
-		<property name="picture" value="http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png" />
 		<property name="userAccount" ref="userAccount2" />
 	</bean>
 	
@@ -142,7 +140,6 @@
 		<property name="surname" value="1" />
 		<property name="email" value="customer1@gmail.com" />
 		<property name="phoneNumber" value="2345" />
-		<property name="picture" value="http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png" />
 		<property name="userAccount" ref="userAccount3" />
 	</bean>
 	
@@ -151,7 +148,6 @@
 		<property name="surname" value="2" />
 		<property name="email" value="customer2@gmail.com" />
 		<property name="phoneNumber" value="2345" />
-		<property name="picture" value="http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png" />
 		<property name="userAccount" ref="userAccount4" />
 	</bean>
 	
@@ -160,7 +156,6 @@
 		<property name="surname" value="3" />
 		<property name="email" value="customer3@gmail.com" />
 		<property name="phoneNumber" value="2345" />
-		<property name="picture" value="http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png" />
 		<property name="userAccount" ref="userAccount5" />
 	</bean>
 	
@@ -169,7 +164,6 @@
 		<property name="surname" value="4" />
 		<property name="email" value="customer4@gmail.com" />
 		<property name="phoneNumber" value="2345" />
-		<property name="picture" value="http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png" />
 		<property name="userAccount" ref="userAccount6" />
 	</bean>
 	
@@ -178,7 +172,6 @@
 		<property name="surname" value="5" />
 		<property name="email" value="customer5@gmail.com" />
 		<property name="phoneNumber" value="2345" />
-		<property name="picture" value="http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png" />
 		<property name="userAccount" ref="userAccount7" />
 	</bean>
 	
@@ -187,7 +180,6 @@
 		<property name="surname" value="6" />
 		<property name="email" value="customer6@gmail.com" />
 		<property name="phoneNumber" value="2345" />
-		<property name="picture" value="http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png" />
 		<property name="userAccount" ref="userAccount8" />
 	</bean>
 	

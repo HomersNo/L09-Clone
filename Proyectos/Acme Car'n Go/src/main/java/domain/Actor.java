@@ -1,13 +1,10 @@
 
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -73,8 +70,7 @@ public class Actor extends Commentable {
 
 	//Relations
 
-	private UserAccount			userAccount;
-	private Collection<Folder>	folders;
+	private UserAccount	userAccount;
 
 
 	@NotNull
@@ -86,16 +82,6 @@ public class Actor extends Commentable {
 
 	public void setUserAccount(final UserAccount userAccount) {
 		this.userAccount = userAccount;
-	}
-
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "actor")
-	public Collection<Folder> getFolders() {
-		return this.folders;
-	}
-	public void setFolders(final Collection<Folder> folders) {
-		this.folders = folders;
 	}
 
 }

@@ -48,6 +48,13 @@ public class FolderService {
 		return result;
 	}
 
+	public Folder findOne(int folderId) {
+
+		Folder folder;
+		folder = folderRepository.findOne(folderId);
+		return folder;
+	}
+
 	public Collection<Folder> findAllByPrincipal() {
 		Actor actor;
 		Collection<Folder> result;
@@ -64,9 +71,9 @@ public class FolderService {
 		Folder inbox;
 		Folder outbox;
 		inbox = create(actor);
-		inbox.setName("inbox");
+		inbox.setName("Inbox");
 		outbox = create(actor);
-		outbox.setName("outbox");
+		outbox.setName("Outbox");
 		aux.add(outbox);
 		aux.add(inbox);
 		result = folderRepository.save(aux);
@@ -84,6 +91,13 @@ public class FolderService {
 		Folder folder;
 		folder = folderRepository.findOne(folderId);
 		checkPrincipal(folder);
+	}
+
+	public Folder findSystemFolder(Actor actor, String name) {
+		Folder result;
+		result = folderRepository.findSystemFolder(actor.getId(), name);
+		Assert.notNull(result);
+		return result;
 	}
 
 }

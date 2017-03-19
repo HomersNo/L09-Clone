@@ -27,7 +27,7 @@
 </thead>
 <tbody>
 	<tr>
-		<td>${ratioOffersVsRequests[0]}</td>
+		<td>${ratioOffersVsRequests}</td>
 	</tr>
 </tbody>
 </table>
@@ -45,8 +45,69 @@
 </thead>
 <tbody>
 	<tr>
-		<td>${avgPostsPerCustomer[1]}</td>
-		<td>${avgApplicationsPerPost[1]}</td>
+		<td>${avgPostsPerCustomer}</td>
+		<td>${avgApplicationsPerPost}</td>
+	</tr>
+</tbody>
+</table>
+<br/>
+
+<table>
+<thead>
+	<tr>
+		<th colspan = "2"><spring:message	code="systemConfiguration.comments.averages" /></th>
+	</tr>
+	<tr>
+		<th><spring:message	code="systemConfiguration.average.comments.commentable" /></th>
+		<th><spring:message	code="systemConfiguration.average.comments.actor" /></th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>${avgCommentsPerCommentable}</td>
+		<td>${avgCommentsPerActor}</td>
+	</tr>
+</tbody>
+</table>
+<br/>
+
+<table>
+<thead>
+	<tr>
+		<th colspan = "3"><spring:message	code="systemConfiguration.messages.sent.stats" /></th>
+	</tr>
+	<tr>
+		<th><spring:message	code="systemConfiguration.messages.sent.min" /></th>
+		<th><spring:message	code="systemConfiguration.messages.sent.avg" /></th>
+		<th><spring:message	code="systemConfiguration.messages.sent.max" /></th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>${minSentMessagesPerActor}</td>
+		<td>${avgSentMessagesPerActor}</td>
+		<td>${maxSentMessagesPerActor}</td>
+	</tr>
+</tbody>
+</table>
+<br/>
+
+<table>
+<thead>
+	<tr>
+		<th colspan = "3"><spring:message	code="systemConfiguration.messages.received.stats" /></th>
+	</tr>
+	<tr>
+		<th><spring:message	code="systemConfiguration.messages.received.min" /></th>
+		<th><spring:message	code="systemConfiguration.messages.received.avg" /></th>
+		<th><spring:message	code="systemConfiguration.messages.received.max" /></th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>${minReceivedMessagesPerActor}</td>
+		<td>${avgReceivedMessagesPerActor}</td>
+		<td>${maxReceivedMessagesPerActor}</td>
 	</tr>
 </tbody>
 </table>
@@ -56,7 +117,7 @@
 <br/>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="customerByAcceptedRequest" requestURI="${requestURI}" id="row">
+	name="customersWithMoreAccepted" requestURI="${requestURI}" id="row">
 
 	<!-- Attributes -->
 
@@ -79,7 +140,7 @@
 <br/>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="customersByDeniedRequest" requestURI="${requestURI}" id="row">
+	name="customersWithMoreDenied" requestURI="${requestURI}" id="row">
 
 	<!-- Attributes -->
 
@@ -102,7 +163,7 @@
 <br/>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="actorsByComments" requestURI="${requestURI}" id="row">
+	name="actorsWith10PercentAvg" requestURI="${requestURI}" id="row">
 
 	<!-- Attributes -->
 
@@ -125,7 +186,7 @@
 <br/>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="actorsBySentMessages" requestURI="${requestURI}" id="row">
+	name="actorWithMoreSentMessages" requestURI="${requestURI}" id="row">
 
 	<!-- Attributes -->
 
@@ -148,7 +209,7 @@
 <br/>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="actorsByReceivedMessages" requestURI="${requestURI}" id="row">
+	name="actorWithMoreReceivedMessages" requestURI="${requestURI}" id="row">
 
 	<!-- Attributes -->
 
@@ -166,3 +227,6 @@
 	
 </display:table>
 <br/>
+
+<input type="button" name="back" value="<spring:message code="systemConfiguration.back"/>" 
+		onclick="javascript: window.location.replace('welcome/index.do')"/>

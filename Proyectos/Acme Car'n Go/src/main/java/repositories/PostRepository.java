@@ -21,4 +21,10 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	@Query("select p from Post p where p.banned = false and p.title like ?1 or p.description like ?1 or p.destination.address like ?1 or p.origin.address like ?1")
 	Collection<Post> findAllFiltered(String filter);
 
+	@Query("select count(p)*1.0/(select count(p)*1.0 from Post p where p.type = 'OFFER') from Post p where p.type = 'REQUEST'")
+	Double ratioOffersRequests();
+
+	@Query("select count(p)*1.0/(select count(c)*1.0 from Customer c) from Post p")
+	Collection<Post> avgPostsPerCustomer();
+
 }

@@ -20,4 +20,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 
 	@Query("select a from Application a where a.post.customer.id = ?1")
 	Collection<Application> findAllReceived(Integer customerId);
+
+	@Query("select count(a)*1.0/(select count(p)*1.0 from Post p) from Application a")
+	Double avgApplicationsPerPost();
 }

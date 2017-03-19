@@ -1,5 +1,4 @@
 <%--
- * action-1.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -20,16 +19,15 @@
 <table>
 <thead>
 	<tr>
-		<th colspan = "2"><spring:message	code="systemConfiguration.requests.accepted" /></th>
+		<th colspan = "1"><spring:message	code="systemConfiguration.ratio.posts" /></th>
 	</tr>
 	<tr>
-		<th><spring:message	code="systemConfiguration.per.actor" /></th>
+		<th><spring:message	code="systemConfiguration.ratio.posts" /></th>
 	</tr>
 </thead>
 <tbody>
 	<tr>
-		<td>${avgAcceptedDeniedPerTenant[0]}</td>
-		<td>${avgAcceptedDeniedPerLessor[0]}</td>
+		<td>${ratioOffersVsRequests[0]}</td>
 	</tr>
 </tbody>
 </table>
@@ -38,17 +36,17 @@
 <table>
 <thead>
 	<tr>
-		<th colspan = "2"><spring:message	code="systemConfiguration.requests.denied" /></th>
+		<th colspan = "2"><spring:message	code="systemConfiguration.posts.averages" /></th>
 	</tr>
 	<tr>
-		<th><spring:message	code="systemConfiguration.per.tenant" /></th>
-		<th><spring:message	code="systemConfiguration.per.lessor" /></th>
+		<th><spring:message	code="systemConfiguration.average.posts.customer" /></th>
+		<th><spring:message	code="systemConfiguration.average.applications.post" /></th>
 	</tr>
 </thead>
 <tbody>
 	<tr>
-		<td>${avgAcceptedDeniedPerTenant[1]}</td>
-		<td>${avgAcceptedDeniedPerLessor[1]}</td>
+		<td>${avgPostsPerCustomer[1]}</td>
+		<td>${avgApplicationsPerPost[1]}</td>
 	</tr>
 </tbody>
 </table>

@@ -17,6 +17,7 @@ import services.CustomerService;
 import services.PostService;
 import controllers.AbstractController;
 import domain.Post;
+import forms.FilterString;
 
 @Controller
 @RequestMapping("/post/customer")
@@ -39,11 +40,14 @@ public class PostCustomerController extends AbstractController {
 		ModelAndView result;
 
 		Collection<Post> posts;
+		final FilterString filter = new FilterString();
 
 		posts = this.postService.findAllByCustomer(this.customerService.findByPrincipal());
 
 		result = new ModelAndView("post/list");
+		result.addObject("requestURI", "post/customer/listOwn.do");
 		result.addObject("posts", posts);
+		result.addObject("filterString", filter);
 
 		return result;
 	}
@@ -65,7 +69,7 @@ public class PostCustomerController extends AbstractController {
 
 	@RequestMapping(value = "/postRequest", method = RequestMethod.GET)
 	public ModelAndView postRequest() {
-		final ModelAndView result;
+		ModelAndView result;
 
 		Post post;
 

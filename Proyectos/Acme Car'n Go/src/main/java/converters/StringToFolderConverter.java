@@ -6,29 +6,30 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.CreditCardRepository;
-import domain.CreditCard;
+import repositories.FolderRepository;
+import domain.Folder;
 
 @Component
 @Transactional
-public class StringToCreditCardConverter implements Converter<String, CreditCard> {
+public class StringToFolderConverter implements Converter<String, Folder> {
 
 	@Autowired
-	private CreditCardRepository	creditCardRepository;
+	FolderRepository	folderRepository;
 
 
 	@Override
-	public CreditCard convert(String text) {
-		CreditCard result;
+	public Folder convert(String text) {
+		Folder result;
 		int id;
 
 		try {
 			id = Integer.valueOf(text);
-			result = creditCardRepository.findOne(id);
+			result = folderRepository.findOne(id);
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);
 		}
 
 		return result;
 	}
+
 }

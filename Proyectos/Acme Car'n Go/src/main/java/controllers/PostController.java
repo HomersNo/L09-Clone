@@ -39,7 +39,7 @@ public class PostController extends AbstractController {
 		requests = this.postService.findAllRequests();
 
 		result = new ModelAndView("post/list");
-		result.addObject("requestURI", "post/customer/listRequests.do");
+		result.addObject("requestURI", "post/listRequests.do");
 		result.addObject("posts", requests);
 		result.addObject("filterString", filter);
 

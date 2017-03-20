@@ -52,7 +52,6 @@ public class CustomerController extends AbstractController {
 			customer = this.customerService.findOne(customerId);
 		result = new ModelAndView("customer/display");
 		result.addObject("customer", customer);
-		result.addObject("comments", customer.getComments());
 
 		return result;
 	}

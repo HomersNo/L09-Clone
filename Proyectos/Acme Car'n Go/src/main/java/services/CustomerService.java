@@ -17,11 +17,7 @@ import repositories.CustomerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Application;
-import domain.Comment;
 import domain.Customer;
-import domain.Folder;
-import domain.Post;
 import forms.Register;
 
 @Service
@@ -46,10 +42,6 @@ public class CustomerService {
 	public Customer create() {
 		Customer created;
 		created = new Customer();
-		created.setPosts(new ArrayList<Post>());
-		created.setApplications(new ArrayList<Application>());
-		created.setFolders(new ArrayList<Folder>());
-		created.setComments(new ArrayList<Comment>());
 
 		final UserAccount userAccount = new UserAccount();
 		final Authority authority = new Authority();
@@ -101,18 +93,6 @@ public class CustomerService {
 		this.customerRepository.delete(customer);
 	}
 
-	public Customer findByPrincipal() {
-		final Customer customer = this.customerRepository.findOneByActor(LoginService.getPrincipal().getId());
-		return customer;
-	}
-
-	public Customer findByUserAccountId(final int userAccountId) {
-
-		final Customer user = this.customerRepository.findOneByActor(userAccountId);
-		return user;
-
-	}
-
 	// Other business methods ---------------------------------------
 	public Customer reconstruct(final Customer customer, final BindingResult binding) {
 		Customer result;
@@ -161,4 +141,11 @@ public class CustomerService {
 		return result;
 	}
 
+	public Customer findByPrincipal() {
+
+		UserAccount userAccount = LoginService.getPrincipal();
+		Customer customer;
+		customer = customerRepository.findOneByUserAccountId(userAccount.getId());
+		return customer;
+	}
 }

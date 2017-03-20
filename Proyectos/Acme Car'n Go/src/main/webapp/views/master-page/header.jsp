@@ -44,14 +44,7 @@
 		</security:authorize>
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
-			<li><a class="fNiv"><spring:message code="master.page.register"/></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="user/create.do"><spring:message code="master.page.register.user"/></a></li>
-					<li><a href="nutritionist/create.do"><spring:message code="master.page.register.nutritionist"/></a></li>
-					<li><a href="sponsor/create.do"><spring:message code="master.page.register.sponsor"/></a></li>
-				</ul>
-			</li>
+			<li><a class="fNiv" href="customer/create.do"><spring:message code="master.page.register"/></a></li>	
 		</security:authorize>
 
 

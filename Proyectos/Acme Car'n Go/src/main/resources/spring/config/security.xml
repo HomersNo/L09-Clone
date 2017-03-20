@@ -49,6 +49,9 @@
 		
 		<security:intercept-url	pattern="/customer/**" access="permitAll" />
 		
+		<security:intercept-url	pattern="/customer/display.do**" access="permitAll" />
+		<security:intercept-url	pattern="/actor/display.do" access="permitAll" />
+		
 		<security:intercept-url	pattern="/folder/actor/**" access="isAuthenticated()" />
 		<security:intercept-url	pattern="/message/actor/**" access="isAuthenticated()" />
 

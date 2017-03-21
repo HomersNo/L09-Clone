@@ -19,7 +19,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <form method="post" action="systemConfiguration/administrator/setBanner.do">
-	<label><spring:message code="systemConfiguration.banner" /></label>${systemConfiguration.banner}<br />
+	<label><spring:message code="systemConfiguration.banner" /></label>
 	<input type="text" name="banner" id="banner"><br />
 	<input type="submit" name="changeBanner"
 		value="<spring:message code="systemConfiguration.change.banner" />" /><br />

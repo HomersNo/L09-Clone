@@ -25,6 +25,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	Double ratioOffersRequests();
 
 	@Query("select count(p)*1.0/(select count(c)*1.0 from Customer c) from Post p")
-	Collection<Post> avgPostsPerCustomer();
+	Double avgPostsPerCustomer();
 
 }

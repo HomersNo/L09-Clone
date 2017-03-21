@@ -156,4 +156,18 @@ public class PostService {
 		Assert.isTrue(post.getCustomer().equals(this.customerService.findByPrincipal()));
 	}
 
+	public Double findRatioOffersVsRequests() {
+		Assert.notNull(this.adminService.findByPrincipal());
+		Double result = 0.0;
+		result = this.postRepository.ratioOffersRequests();
+		return result;
+	}
+
+	public Double findAvgPostsPerCustomer() {
+		Assert.notNull(this.adminService.findByPrincipal());
+		Double result = 0.0;
+		result = this.postRepository.avgPostsPerCustomer();
+		return result;
+	}
+
 }

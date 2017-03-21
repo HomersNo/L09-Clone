@@ -26,11 +26,6 @@
 	
 	<!-- Action links -->
 
-	<display:column>
-		<a href="message/actor/move.do?messageId=${row.id}">
-			<spring:message	code="message.move" />
-		</a>
-	</display:column>		
 	
 	<display:column>
 		<a href="message/actor/delete.do?messageId=${row.id}">
@@ -47,21 +42,19 @@
 	<display:column property="moment" title="${momentHeader}" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
 
 	<spring:message code="message.body" var="bodyHeader" />
-	<display:column property="body" title="${bodyHeader}" sortable="false" />
+	<display:column property="text" title="${bodyHeader}" sortable="false" />
 	
-	<spring:message code="message.priority" var="priorityHeader"/>
-	<display:column property="priority" title="${priorityHeader}" sortable="true"/>
 	
 	
 	<spring:message code="message.sender" var="senderHeader"/>
 	<display:column title="${senderHeader}">
-		<a href="actor/display.do?userAccountId=${row.sender.id}"> <spring:message code="message.sender"/></a>
+		<a href="actor/display.do?actorId=${row.sender.id}"> ${row.sender.name} ${row.sender.surname}</a>
 	</display:column>
 	
 	
 	<spring:message code="message.recipient" var="recipientHeader"/>
 	<display:column title="${recipientHeader}">
-		<a href="actor/display.do?userAccountId=${row.recipient.id }"> <spring:message code ="message.recipient" /> </a>
+		<a href="actor/display.do?actorId=${row.recipient.id }">${row.recipient.name } ${row.recipient.surname }</a>
 	</display:column> 
 	
 

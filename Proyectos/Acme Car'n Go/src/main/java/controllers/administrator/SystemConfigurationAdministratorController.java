@@ -51,10 +51,10 @@ public class SystemConfigurationAdministratorController extends AbstractControll
 	public ModelAndView setBanner(@RequestParam(required = true) final String banner) {
 		ModelAndView result;
 		final SystemConfiguration systemConfiguration = this.systemConfigurationService.findMain();
-		systemConfiguration.setBanner(banner);
 		try {
+			systemConfiguration.setBanner(banner);
 			this.systemConfigurationService.save(systemConfiguration);
-			result = new ModelAndView("redirect:edit.do");
+			result = new ModelAndView("redirect:/welcome/index.do");
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(systemConfiguration, "systemConfiguration.negative");
 		}

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
@@ -12,6 +13,7 @@ import domain.Actor;
 import domain.Comment;
 import domain.Commentable;
 
+@Service
 public class CommentService {
 
 	//managed repository-------------------

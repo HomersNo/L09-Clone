@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.ApplicationRepository;
 import domain.Application;
+import domain.Customer;
 import domain.Post;
 
 @Service
@@ -28,7 +29,7 @@ public class ApplicationService {
 	private CustomerService			customerService;
 
 	@Autowired
-	private PostService				postService;
+	private AdministratorService	adminService;
 
 
 	public Application create(final Post post) {
@@ -114,6 +115,27 @@ public class ApplicationService {
 		result = this.create(post);
 		result.setStatus("PENDING");
 
+		return result;
+	}
+
+	public Double findAvgApplicationsPerPost() {
+		Assert.notNull(this.adminService.findByPrincipal());
+		Double result = 0.0;
+		result = this.applicationRepository.avgApplicationsPerPost();
+		return result;
+	}
+
+	public Collection<Customer> findCustomersWithMoreAccepted() {
+		Assert.notNull(this.adminService.findByPrincipal());
+		Collection<Customer> result = null;
+		result = this.applicationRepository.customersWithMoreAccepted();
+		return result;
+	}
+
+	public Collection<Customer> findCustomersWithMoreDenied() {
+		Assert.notNull(this.adminService.findByPrincipal());
+		Collection<Customer> result = null;
+		result = this.applicationRepository.customersWithMoreDenied();
 		return result;
 	}
 }

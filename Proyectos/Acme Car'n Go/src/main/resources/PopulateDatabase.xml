@@ -612,4 +612,9 @@
 	</bean>
 	
 	
+	
+	<bean id="systemConfiguration" class="domain.SystemConfiguration">
+		<property name="banner" value="http://2.bp.blogspot.com/-8TFZxUDrFCg/UEx8iJXnZPI/AAAAAAAAARw/RgR7KVxC42g/s1600/Absolutely-Random-banner.jpg"/>
+	</bean>
+	
 </beans>

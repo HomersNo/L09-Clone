@@ -48,13 +48,13 @@
 	
 	<spring:message code="message.sender" var="senderHeader"/>
 	<display:column title="${senderHeader}">
-		<a href="actor/display.do?actorId=${row.sender.id}"> ${row.sender.name} ${row.sender.surname}</a>
+		<a href="actor/actor/display.do?actorId=${row.sender.id}"> ${row.sender.name} ${row.sender.surname}</a>
 	</display:column>
 	
 	
 	<spring:message code="message.recipient" var="recipientHeader"/>
 	<display:column title="${recipientHeader}">
-		<a href="actor/display.do?actorId=${row.recipient.id }">${row.recipient.name } ${row.recipient.surname }</a>
+		<a href="actor/actor/display.do?actorId=${row.recipient.id }">${row.recipient.name } ${row.recipient.surname }</a>
 	</display:column> 
 	
 

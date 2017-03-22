@@ -50,6 +50,8 @@ public class MessageService {
 		final Message result = new Message();
 		Actor sender;
 		sender = this.actorService.findByPrincipal();
+		final Folder senderFolder = this.folderService.findSystemFolder(sender, "Outbox");
+		result.setFolder(senderFolder);
 		result.setMoment(new Date());
 		result.setSender(sender);
 		return result;
@@ -106,7 +108,6 @@ public class MessageService {
 
 		message.setFolder(recipientFolder);
 
-		this.messageRepository.save(message);
 		this.messageRepository.save(message);
 
 		return message;

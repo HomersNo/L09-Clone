@@ -501,6 +501,7 @@
 		<property name="text" value="jaja salu2" />
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="stars" value="5" />
+		<property name="banned" value="false" />
 		<property name="commentable" ref="post1" />
 		<property name="actor" ref="customer1" />
 	</bean>
@@ -510,6 +511,7 @@
 		<property name="text" value="¿Quieres ser mi amigo?" />
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="stars" value="1" />
+		<property name="banned" value="true" />
 		<property name="commentable" ref="customer1" />
 		<property name="actor" ref="customer2" />
 	</bean>
@@ -519,6 +521,7 @@
 		<property name="text" value="ci" />
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="stars" value="5" />
+		<property name="banned" value="false" />
 		<property name="commentable" ref="post4" />
 		<property name="actor" ref="customer4" />
 	</bean>
@@ -528,6 +531,7 @@
 		<property name="text" value="Me gusta mucho tu perfil" />
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="stars" value="5" />
+		<property name="banned" value="false" />
 		<property name="commentable" ref="customer6" />
 		<property name="actor" ref="customer3" />
 	</bean>
@@ -537,6 +541,7 @@
 		<property name="text" value="blae" />
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="stars" value="5" />
+		<property name="banned" value="true" />
 		<property name="commentable" ref="customer5" />
 		<property name="actor" ref="customer6" />
 	</bean>
@@ -546,6 +551,7 @@
 		<property name="text" value="Soy nuevo aquí" />
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="stars" value="1" />
+		<property name="banned" value="false" />
 		<property name="commentable" ref="post5" />
 		<property name="actor" ref="customer3" />
 	</bean>
@@ -555,6 +561,7 @@
 		<property name="text" value="¿Como se comenta?" />
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="stars" value="5" />
+		<property name="banned" value="false" />
 		<property name="commentable" ref="post1" />
 		<property name="actor" ref="customer1" />
 	</bean>
@@ -564,6 +571,7 @@
 		<property name="text" value="Probando este comentario" />
 		<property name="moment" value="03/03/2017 23:46" />
 		<property name="stars" value="5" />
+		<property name="banned" value="true" />
 		<property name="commentable" ref="post3" />
 		<property name="actor" ref="customer2" />
 	</bean>

@@ -97,7 +97,9 @@ public class Post extends Commentable {
 	}
 
 	@Valid
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = {
+		CascadeType.PERSIST, CascadeType.MERGE
+	})
 	public Place getOrigin() {
 		return this.origin;
 	}
@@ -106,7 +108,9 @@ public class Post extends Commentable {
 		this.origin = origin;
 	}
 	@Valid
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = {
+		CascadeType.PERSIST, CascadeType.MERGE
+	})
 	public Place getDestination() {
 		return this.destination;
 	}

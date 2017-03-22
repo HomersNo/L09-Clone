@@ -39,19 +39,21 @@ public class PostController extends AbstractController {
 	public ModelAndView display(@RequestParam final int postId) {
 		ModelAndView result;
 
-		Collection<Comment> comments;
+		Collection<Comment> adminComments;
+		Collection<Comment> customerComments;
 		Post post;
 
 		post = this.postService.findOne(postId);
-		comments = this.commentService.findAllByCommentableId(postId);
+		adminComments = this.commentService.findAllByCommentableId(postId);
+		customerComments = this.commentService.findNotBannedCommentsCustomer(postId);
 
 		result = new ModelAndView("post/display");
 		result.addObject("post", post);
-		result.addObject("comments", comments);
+		result.addObject("adminComments", adminComments);
+		result.addObject("customerComments", customerComments);
 
 		return result;
 	}
-
 	@RequestMapping(value = "/listRequests", method = RequestMethod.GET)
 	public ModelAndView listRequests() {
 		ModelAndView result;

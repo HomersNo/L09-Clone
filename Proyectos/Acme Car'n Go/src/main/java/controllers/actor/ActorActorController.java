@@ -31,14 +31,17 @@ public class ActorActorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int actorId) {
+	public ModelAndView display(@RequestParam(required = false, defaultValue = "0") final int actorId) {
 
 		ModelAndView result;
 		Actor actor;
 
-		actor = this.actorService.findOne(actorId);
-
 		result = new ModelAndView("redirect:/welcome/index.do");
+
+		if (actorId == 0)
+			actor = this.actorService.findByPrincipal();
+		else
+			actor = this.actorService.findOne(actorId);
 
 		if (actor instanceof Customer)
 			result = new ModelAndView("redirect:/customer/actor/display.do?customerId=" + actor.getId());

@@ -46,7 +46,7 @@
 	</display:column>
 	
 	<display:column>
-		<a href="customer/display.do?customerId=${row.customer.id}"><spring:message code="post.author"/></a>
+		<a href="customer/display.do?customerId=${row.customer.id}">${row.customer.name} ${row.customer.surname}</a>
 	</display:column>
 
 </display:table>

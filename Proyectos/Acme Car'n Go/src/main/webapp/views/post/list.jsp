@@ -42,7 +42,7 @@
 	<acme:column code="post.destination" path="destination.address"/>
 	
 	<display:column >
-		<a href="post/customer/display.do?postId=${row.id}"><spring:message code="post.display" /></a>
+		<a href="post/display.do?postId=${row.id}"><spring:message code="post.display" /></a>
 	</display:column>
 	
 	<display:column>

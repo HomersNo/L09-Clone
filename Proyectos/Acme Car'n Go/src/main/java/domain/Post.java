@@ -12,7 +12,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -52,7 +51,6 @@ public class Post extends Commentable {
 		this.description = description;
 	}
 
-	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
@@ -99,7 +97,9 @@ public class Post extends Commentable {
 	}
 
 	@Valid
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = {
+		CascadeType.PERSIST, CascadeType.MERGE
+	})
 	public Place getOrigin() {
 		return this.origin;
 	}
@@ -108,7 +108,9 @@ public class Post extends Commentable {
 		this.origin = origin;
 	}
 	@Valid
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = {
+		CascadeType.PERSIST, CascadeType.MERGE
+	})
 	public Place getDestination() {
 		return this.destination;
 	}

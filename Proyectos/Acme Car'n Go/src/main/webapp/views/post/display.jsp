@@ -30,9 +30,9 @@
 <p><jstl:out value="${post.description}"></jstl:out> </p>
 <p><spring:message code="post.at" /> <jstl:out value="${post.moment}"/></p>
 
-<p> <spring:message code="post.journey.from" />: <jstl:out value="${post.origin.address}" />. <spring:message code="post.coordinates" />: <jstl:out value="(${post.origin.latitude},${post.origin.longitude})"/> </p>
+<p> <spring:message code="post.journey.from" />: <jstl:out value="${post.origin.address}" />.<jstl:if test="${not empty post.origin.latitude }"> <spring:message code="post.coordinates" />: <jstl:out value="(${post.origin.latitude},${post.origin.longitude})"/></jstl:if> </p>
 
-<p> <spring:message code="post.journey.to" />: <jstl:out value="${post.destination.address}" />. <spring:message code="post.coordinates" />: <jstl:out value="(${post.destination.latitude},${post.destination.longitude})"/> </p>
+<p> <spring:message code="post.journey.to" />: <jstl:out value="${post.destination.address}" />.<jstl:if test="${not empty post.destination.latitude }"> <spring:message code="post.coordinates" />: <jstl:out value="(${post.destination.latitude},${post.destination.longitude})"/></jstl:if> </p>
 
 
 <b><spring:message code="post.comments"/></b><br/>
@@ -56,7 +56,7 @@
 	
 	<spring:message code="comment.author" var="authorHeader"/>
 	<display:column title="${authorHeader}">
-		<a href="actor/display.do?actorId=${row.actor.id}"> ${row.actor.name} ${row.actor.surname}</a>
+		<a href="actor/display.do?actorId=${row.actor.id}"> <jstl:out value="${row.actor.name} ${row.actor.surname}"/> </a>
 	</display:column>
 	
 </display:table>

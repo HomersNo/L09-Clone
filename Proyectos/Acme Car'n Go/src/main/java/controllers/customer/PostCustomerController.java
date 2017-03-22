@@ -109,7 +109,7 @@ public class PostCustomerController extends AbstractController {
 
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(post, "post.commit.error");
-				result.addObject("post", post);
+
 			}
 
 		return result;

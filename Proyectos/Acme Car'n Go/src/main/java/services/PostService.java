@@ -43,6 +43,7 @@ public class PostService {
 		result = new Post();
 
 		result.setBanned(false);
+		result.setCustomer(this.customerService.findByPrincipal());
 
 		return result;
 	}

@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.Date;
@@ -13,98 +14,96 @@ import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import security.UserAccount;
-
-
 @Entity
 @Access(AccessType.PROPERTY)
 public class Message extends DomainEntity {
-	
+
 	// Constructor
-	
-	public Message(){
+
+	public Message() {
 		super();
 	}
-	
+
+
 	// Attributes
-	
-	private String title;
-	private String text;
-	private Date moment;
-	private String attachment;
-	
+
+	private String	title;
+	private String	text;
+	private Date	moment;
+	private String	attachment;
+
+
 	@NotBlank
-	
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		this.title = title;
 	}
-	
+
 	@NotBlank
-	
 	public String getText() {
-		return text;
+		return this.text;
 	}
-	public void setText(String text) {
+	public void setText(final String text) {
 		this.text = text;
 	}
-	
+
 	@Past
 	@NotNull
-	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
-		return moment;
+		return this.moment;
 	}
-	public void setMoment(Date moment) {
+	public void setMoment(final Date moment) {
 		this.moment = moment;
 	}
-	
+
 	public String getAttachment() {
-		return attachment;
+		return this.attachment;
 	}
-	public void setAttachment(String attachment) {
+	public void setAttachment(final String attachment) {
 		this.attachment = attachment;
 	}
-	
+
+
 	// Relationships
-	
-	private Folder folder;
-	private UserAccount sender;
-	private UserAccount recipient;
+
+	private Folder	folder;
+	private Actor	sender;
+	private Actor	recipient;
+
 
 	@Valid
 	@NotNull
-	@ManyToOne(optional =false)
+	@ManyToOne(optional = false)
 	public Folder getFolder() {
-		return folder;
+		return this.folder;
 	}
-	public void setFolder(Folder folder) {
+	public void setFolder(final Folder folder) {
 		this.folder = folder;
 	}
-	
+
 	@Valid
 	@NotNull
-	@ManyToOne(optional =false)
-//	@NotFound(action = NotFoundAction.IGNORE)
-	public UserAccount getSender() {
-		return sender;
+	@ManyToOne(optional = false)
+	//	@NotFound(action = NotFoundAction.IGNORE)
+	public Actor getSender() {
+		return this.sender;
 	}
-	public void setSender(UserAccount sender) {
+	public void setSender(final Actor sender) {
 		this.sender = sender;
 	}
-	
+
 	@Valid
 	@NotNull
-	@ManyToOne(optional =false)
-//	@NotFound(action = NotFoundAction.IGNORE)
-	public UserAccount getRecipient() {
-		return recipient;
+	@ManyToOne(optional = false)
+	//	@NotFound(action = NotFoundAction.IGNORE)
+	public Actor getRecipient() {
+		return this.recipient;
 	}
-	public void setRecipient(UserAccount recipient) {
+	public void setRecipient(final Actor recipient) {
 		this.recipient = recipient;
 	}
-	
 
 }

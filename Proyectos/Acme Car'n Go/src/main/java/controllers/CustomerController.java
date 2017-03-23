@@ -10,38 +10,102 @@
 
 package controllers;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import services.CustomerService;
+import domain.Customer;
+import forms.Register;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController extends AbstractController {
 
-	// Constructors -----------------------------------------------------------
+	// Services -----------------------------------------------------------------------
+	@Autowired
+	private CustomerService	customerService;
+
+
+	// Constructor --------------------------------------------------------------------
 
 	public CustomerController() {
 		super();
 	}
 
-	// Action-1 ---------------------------------------------------------------		
+	// Listing ------------------------------------------------------------------------	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam(required = false, defaultValue = "0") final int customerId) {
 
-	@RequestMapping("/action-1")
-	public ModelAndView action1() {
 		ModelAndView result;
+		Customer customer;
 
-		result = new ModelAndView("customer/action-1");
+		if (customerId == 0)
+			customer = this.customerService.findByPrincipal();
+		else
+			customer = this.customerService.findOne(customerId);
+		result = new ModelAndView("customer/display");
+		result.addObject("customer", customer);
 
 		return result;
 	}
 
-	// Action-2 ---------------------------------------------------------------		
+	// Creation -----------------------------------------------------------------------
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		Register customer;
 
-	@RequestMapping("/action-2")
-	public ModelAndView action2() {
+		customer = new Register();
+		customer.setAccept(false);
+
+		result = this.createEditModelAndView(customer);
+
+		return result;
+	}
+
+	// Edition ------------------------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final Register registerCustomer, final BindingResult binding) {
+		ModelAndView result;
+		Customer customer;
+
+		customer = this.customerService.reconstruct(registerCustomer, binding);
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(registerCustomer);
+		else
+			try {
+				customer = this.customerService.register(customer);
+				result = new ModelAndView("redirect:/security/login.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(registerCustomer, "customer.commit.error");
+			}
+		return result;
+	}
+
+	// Ancillary methods --------------------------------------------------------------
+	protected ModelAndView createEditModelAndView(final Register customer) {
 		ModelAndView result;
 
-		result = new ModelAndView("customer/action-2");
+		result = this.createEditModelAndView(customer, null);
+
+		return result;
+	}
+	protected ModelAndView createEditModelAndView(final Register customer, final String message) {
+		ModelAndView result;
+
+		final String requestURI = "customer/edit.do";
+
+		result = new ModelAndView("customer/register");
+		result.addObject("register", customer);
+		result.addObject("message", message);
+		result.addObject("requestURI", requestURI);
 
 		return result;
 	}

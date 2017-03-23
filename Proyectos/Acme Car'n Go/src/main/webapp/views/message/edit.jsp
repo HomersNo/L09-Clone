@@ -35,11 +35,11 @@
 	<form:errors cssClass="error" path="title" />
 	<br />
 	
-	<form:label path="body">
+	<form:label path="text">
 		<spring:message code="message.body" />:
 	</form:label>
-	<form:textarea path="body" />
-	<form:errors cssClass="error" path="body" />
+	<form:textarea path="text" />
+	<form:errors cssClass="error" path="text" />
 	<br />
 	
 	<form:label path="moment">
@@ -49,24 +49,13 @@
 	<form:errors cssClass="error" path="moment" />
 	<br />
 	
-	<form:label path="priority">
-		<spring:message code="message.priority" />:
-	</form:label>
-	<form:select path="priority" >
-		<form:option value="LOW" label="Low"/>
-		<form:option value="NEUTRAL" label="Neutral"/>
-		<form:option value="HIGH" label="High"/>
-	</form:select>
-	<form:errors cssClass="error" path="priority" />
-	<br />
-	
 	<form:label path="recipient">
 		<spring:message code="message.recipient" />:
 	</form:label>
 	<form:select id="actors" path="recipient" >
 		<form:option value="0" label="----"/>
 		<jstl:forEach items="${actors}" var="actor">
-			<form:option value="${actor.userAccount.id}" label="${actor.surname}, ${actor.name}" />
+			<form:option value="${actor.id}" label="${actor.surname}, ${actor.name}" />
 		</jstl:forEach>
 	</form:select>
 	<form:errors cssClass="error" path="recipient" />

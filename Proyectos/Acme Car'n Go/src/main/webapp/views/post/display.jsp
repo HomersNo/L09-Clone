@@ -98,3 +98,10 @@
 	
 </security:authorize>
 
+<br/>
+
+<security:authorize access="hasRole('CUSTOMER')">
+<jstl:if test="${row.banned eq false}">
+	<a href="comment/actor/create.do?commentableId=${post.id}"><spring:message code="comment.new" /></a>
+</jstl:if>
+</security:authorize>

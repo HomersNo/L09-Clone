@@ -36,66 +36,66 @@ public class FolderService {
 
 	//CRUD
 
-	public Folder create(Actor actor) {
-		Folder result = new Folder();
+	public Folder create(final Actor actor) {
+		final Folder result = new Folder();
 		result.setActor(actor);
 		return result;
 	}
 
-	public Folder save(Folder folder) {
+	public Folder save(final Folder folder) {
 		Folder result;
-		result = folderRepository.save(folder);
+		result = this.folderRepository.save(folder);
 		return result;
 	}
 
-	public Folder findOne(int folderId) {
+	public Folder findOne(final int folderId) {
 
 		Folder folder;
-		folder = folderRepository.findOne(folderId);
+		folder = this.folderRepository.findOne(folderId);
 		return folder;
 	}
 
 	public Collection<Folder> findAllByPrincipal() {
 		Actor actor;
 		Collection<Folder> result;
-		actor = actorService.findByPrincipal();
-		result = folderRepository.findAllByActor(actor.getId());
+		actor = this.actorService.findByPrincipal();
+		result = this.folderRepository.findAllByActor(actor.getId());
 		return result;
 	}
 
 	//Business Methods
 
-	public Collection<Folder> initFolders(Actor actor) {
+	public Collection<Folder> initFolders(final Actor actor) {
 		Collection<Folder> result = new ArrayList<Folder>();
-		Collection<Folder> aux = new ArrayList<Folder>();
+		final Collection<Folder> aux = new ArrayList<Folder>();
 		Folder inbox;
 		Folder outbox;
-		inbox = create(actor);
+		inbox = this.create(actor);
 		inbox.setName("Inbox");
-		outbox = create(actor);
+		outbox = this.create(actor);
 		outbox.setName("Outbox");
 		aux.add(outbox);
 		aux.add(inbox);
-		result = folderRepository.save(aux);
+		result = this.folderRepository.save(aux);
 
 		return result;
 
 	}
 
-	public void checkPrincipal(Folder folder) {
-		Actor actor = actorService.findByPrincipal();
+	public void checkPrincipal(final Folder folder) {
+		final Actor actor = this.actorService.findByPrincipal();
 		Assert.isTrue(actor.equals(folder.getActor()), "Dear User, you can't edit a folder that doesn't belong to you");
 	}
 
-	public void checkPrincipal(int folderId) {
+	public void checkPrincipal(final int folderId) {
 		Folder folder;
-		folder = folderRepository.findOne(folderId);
-		checkPrincipal(folder);
+		folder = this.folderRepository.findOne(folderId);
+		this.checkPrincipal(folder);
 	}
 
-	public Folder findSystemFolder(Actor actor, String name) {
+	public Folder findSystemFolder(final Actor actor, final String name) {
 		Folder result;
-		result = folderRepository.findSystemFolder(actor.getId(), name);
+		result = this.folderRepository.findSystemFolder(actor.getId(), name);
 		Assert.notNull(result);
 		return result;
 	}

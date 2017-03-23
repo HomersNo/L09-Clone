@@ -83,6 +83,22 @@ public class PostService {
 		return result;
 	}
 
+	public Collection<Post> findAllRequestsNotBanned() {
+		Collection<Post> result;
+
+		result = this.postRepository.findByTypeNotBanned("REQUEST");
+
+		return result;
+	}
+
+	public Collection<Post> findAllOffersNotBanned() {
+		Collection<Post> result;
+
+		result = this.postRepository.findByTypeNotBanned("OFFER");
+
+		return result;
+	}
+
 	public Collection<Post> findAllFiltered(final String filter) {
 		Collection<Post> posts;
 

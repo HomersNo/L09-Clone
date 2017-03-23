@@ -78,11 +78,19 @@
 	
 	<spring:message code="comment.ban" var="banHeader"/>
 	<display:column title="${banHeader}">
+	<jstl:if test="${!(row.banned)}">
 		<a href="comment/administrator/ban.do?commentId=${row.id}"> ban</a>
+	</jstl:if>
 	</display:column>
+
 	
 </display:table>
 	
+</security:authorize>
+<br/>
+
+<security:authorize access="hasRole('CUSTOMER')">
+<a href="comment/actor/create.do?commentableId=${customer.id}"><spring:message code="comment.new" /></a>
 </security:authorize>
 
 

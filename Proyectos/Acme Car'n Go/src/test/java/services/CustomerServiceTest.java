@@ -35,27 +35,27 @@ public class CustomerServiceTest extends AbstractTest {
 	@Test
 	public void driverCreation() {
 		final Object testingData[][] = {
-			{
+			{		// Creación correcta de un Customer.
 				"correcto", "correcto", "correcto", "correcto", "correcto@bien.com", "1234", null
-			}, {
+			}, {	// Creación errónea de un Customer: username vacío.
 				"", "correcto", "correcto", "correcto", "correcto@bien.com", "1234", ConstraintViolationException.class
-			}, {
+			}, {	// Creación errónea de un Customer: password vacío.
 				"correcto", "", "correcto", "correcto", "correcto@bien.com", "1234", ConstraintViolationException.class
-			}, {
+			}, {	// Creación errónea de un Customer: name vacío.
 				"correcto", "correcto", "", "correcto", "correcto@bien.com", "1234", ConstraintViolationException.class
-			}, {
+			}, {	// Creación errónea de un Customer: surname vacío.
 				"correcto", "correcto", "correcto", "", "correcto@bien.com", "1234", ConstraintViolationException.class
-			}, {
+			}, {	// Creación errónea de un Customer: email vacío.
 				"correcto", "correcto", "correcto", "correcto", "", "1234", ConstraintViolationException.class
-			}, {
+			}, {	// Creación errónea de un Customer: phoneNumber vacío.
 				"correcto", "correcto", "correcto", "correcto", "correcto@bien.com", "", ConstraintViolationException.class
-			}, {
+			}, {	// Creación errónea de un Customer: username con pocos carácteres.
 				"cor", "correcto", "correcto", "correcto", "correcto@bien.com", "1234", ConstraintViolationException.class
-			}, {
+			}, {	// Creación errónea de un Customer: password con pocos carácteres.
 				"correcto", "cor", "correcto", "correcto", "correcto@bien.com", "1234", ConstraintViolationException.class
-			}, {
+			}, {	// Creación errónea de un Customer: email incorrecto.
 				"correcto", "correcto", "correcto", "correcto", "correcto.com", "1234", ConstraintViolationException.class
-			}, {
+			}, {	// Creación errónea de un Customer: phoneNumber incorrecto.
 				"correcto", "correcto", "correcto", "correcto", "correcto@bien.com", "AA", ConstraintViolationException.class
 			}
 		};

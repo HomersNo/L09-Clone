@@ -38,29 +38,37 @@ public class Comment extends DomainEntity {
 	private String	text;
 	private Integer	stars;
 	private Date	moment;
+	private Boolean	banned;
 
 
 	@NotBlank
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		this.title = title;
+	}
+
+	public Boolean getBanned() {
+		return this.banned;
+	}
+	public void setBanned(final Boolean banned) {
+		this.banned = banned;
 	}
 
 	@NotBlank
 	public String getText() {
-		return text;
+		return this.text;
 	}
-	public void setText(String text) {
+	public void setText(final String text) {
 		this.text = text;
 	}
 
 	@Range(min = 1, max = 5)
 	public Integer getStars() {
-		return stars;
+		return this.stars;
 	}
-	public void setStars(Integer stars) {
+	public void setStars(final Integer stars) {
 		this.stars = stars;
 	}
 
@@ -68,9 +76,9 @@ public class Comment extends DomainEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
-		return moment;
+		return this.moment;
 	}
-	public void setMoment(Date moment) {
+	public void setMoment(final Date moment) {
 		this.moment = moment;
 	}
 
@@ -86,18 +94,18 @@ public class Comment extends DomainEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	public Actor getActor() {
-		return actor;
+		return this.actor;
 	}
-	public void setActor(Actor actor) {
+	public void setActor(final Actor actor) {
 		this.actor = actor;
 	}
 
 	@Valid
 	@ManyToOne(optional = false)
 	public Commentable getCommentable() {
-		return commentable;
+		return this.commentable;
 	}
-	public void setCommentable(Commentable commentable) {
+	public void setCommentable(final Commentable commentable) {
 		this.commentable = commentable;
 	}
 

@@ -1,11 +1,11 @@
-/* StringToAdministratorConverter.java
- *
+/*
+ * StringToAdministratorConverter.java
+ * 
  * Copyright (C) 2017 Universidad de Sevilla
  * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
+ * The use of this project is hereby constrained to the conditions of the
+ * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
- * 
  */
 
 package converters;
@@ -23,17 +23,18 @@ import domain.Administrator;
 public class StringToAdministratorConverter implements Converter<String, Administrator> {
 
 	@Autowired
-	AdministratorRepository administratorRepository;
+	AdministratorRepository	administratorRepository;
+
 
 	@Override
-	public Administrator convert(String text) {
+	public Administrator convert(final String text) {
 		Administrator result;
 		int id;
 
 		try {
 			id = Integer.valueOf(text);
-			result = administratorRepository.findOne(id);
-		} catch (Throwable oops) {
+			result = this.administratorRepository.findOne(id);
+		} catch (final Throwable oops) {
 			throw new IllegalArgumentException(oops);
 		}
 

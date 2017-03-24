@@ -19,7 +19,7 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="post/customer/filter.do" modelAttribute="filterString">
+<form:form action="post/filter.do" modelAttribute="filterString">
 	<acme:textbox code="post.filter" path="filter"/>
 	
 	<acme:submit name="filterButton" code="post.search"/>
@@ -46,7 +46,7 @@
 	</display:column>
 	
 	<display:column>
-		<a href="customer/display.do?customerId=${row.customer.id}"><spring:message code="post.author"/></a>
+		<a href="customer/display.do?customerId=${row.customer.id}">${row.customer.name} ${row.customer.surname}</a>
 	</display:column>
 
 </display:table>

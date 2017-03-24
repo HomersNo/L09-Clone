@@ -115,6 +115,8 @@ public class ApplicationService {
 		result = this.create(post);
 		result.setStatus("PENDING");
 
+		result = this.applicationRepository.save(result);
+
 		return result;
 	}
 

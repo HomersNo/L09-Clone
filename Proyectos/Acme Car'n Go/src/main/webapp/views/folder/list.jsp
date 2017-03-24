@@ -27,9 +27,3 @@
 
 	
 </display:table>
-
-<div>
-	<a href="folder/actor/create.do"> <spring:message
-			code="folder.create" />
-	</a>
-</div>

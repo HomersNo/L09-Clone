@@ -3,6 +3,8 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,9 @@ public class CommentService {
 	@Autowired
 	private AdministratorService	adminService;
 
+	@Autowired
+	private CustomerService			customerService;
+
 
 	//Basic CRUD methods-------------------
 
@@ -34,6 +39,7 @@ public class CommentService {
 
 		Comment created;
 		created = new Comment();
+		created.setBanned(false);
 		final Date moment = new Date(System.currentTimeMillis() - 100);
 		final Actor actor = this.actorService.findByPrincipal();
 		created.setActor(actor);
@@ -77,6 +83,27 @@ public class CommentService {
 
 	}
 
+	public Collection<Comment> findNotBannedCommentsCustomer(final int commentableId) {
+
+		final Actor principal;
+		final Set<Comment> result = new HashSet<Comment>();
+
+		principal = this.actorService.findByPrincipal();
+		result.addAll(this.findNotBannedComments(commentableId));
+		result.addAll(this.commentRepository.findCommentsByCustomer(principal.getId(), commentableId));
+
+		return result;
+
+	}
+	public Collection<Comment> findNotBannedComments(final int commentableId) {
+
+		final Collection<Comment> result;
+
+		result = this.commentRepository.findNotBannedComments(commentableId);
+
+		return result;
+	}
+
 	//Auxiliary methods
 
 	//Our other bussiness methods
@@ -102,4 +129,14 @@ public class CommentService {
 		return result;
 	}
 
+	public Comment banComment(final Comment comment) {
+
+		this.adminService.checkAdministrator();
+		Comment result;
+
+		comment.setBanned(true);
+		result = this.save(comment);
+
+		return result;
+	}
 }

@@ -24,4 +24,10 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
 	@Query("select c.actor from Comment c group by c.actor having count(c)*1.0 >= (select (count(c)*1.0/(select count(a)*1.0 from Actor a))*0.9 from Comment c)	and count(c)*1.0 <=	(select (count(c)*1.0/(select count(a)*1.0 from Actor a))*1.1 from Comment c)")
 	Collection<Actor> actorsWith10PercentAvg();
+
+	@Query("select c from Comment c where c.banned=false and c.commentable.id=?1")
+	Collection<Comment> findNotBannedComments(int commentableId);
+
+	@Query("select c from Comment c where c.actor.id=?1 and c.commentable.id=?2")
+	Collection<Comment> findCommentsByCustomer(int customerId, int commentableId);
 }

@@ -47,7 +47,15 @@
 			<li><a class="fNiv" href="customer/create.do"><spring:message code="master.page.register"/></a></li>	
 		</security:authorize>
 
-
+		<security:authorize access="hasRole('CUSTOMER')">
+		<li><a class="fNiv"><spring:message code="master.page.applications"/></a>
+			<ul>
+				<li class="arrow"></li>
+				<li><a href="application/customer/listReceived.do"><spring:message code="master.page.applications.received"/></a>
+				<li><a href="application/customer/listSent.do"><spring:message code="master.page.applications.sent"/></a>
+			</ul>
+		</li>
+		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
 			<li>
@@ -59,7 +67,9 @@
 					<li class="arrow"></li>
 					<li><a href="folder/actor/list.do"><spring:message code="master.page.profile.folder.list" /></a></li>		
 					<li><a href="message/actor/create.do"><spring:message code="master.page.profile.message.create" /></a></li>
-					<li><a href="actor/display.do"><spring:message code="master.page.actor.display" /></a></li>
+					<security:authorize access="hasRole('CUSTOMER')">
+						<li><a href="actor/actor/display.do"><spring:message code="master.page.actor.display" /></a></li>
+					</security:authorize>
 					<security:authorize access="hasRole('ADMIN')">
 						<li><a><spring:message	code="master.page.administrator" /></a>
 							<ul>

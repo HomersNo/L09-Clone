@@ -12,7 +12,7 @@ import controllers.AbstractController;
 import domain.Post;
 
 @Controller
-@RequestMapping("/post/customer")
+@RequestMapping("/post/administrator")
 public class PostAdministratorController extends AbstractController {
 
 	public PostAdministratorController() {
@@ -31,7 +31,7 @@ public class PostAdministratorController extends AbstractController {
 		post = this.postService.findOne(postId);
 		this.postService.ban(post);
 
-		result = new ModelAndView("redirect: /welcome/index.do");
+		result = new ModelAndView("redirect:welcome/index.do");
 
 		return result;
 	}

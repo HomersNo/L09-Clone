@@ -34,8 +34,13 @@
 
 <p> <spring:message code="post.journey.to" />: <jstl:out value="${post.destination.address}" />.<jstl:if test="${not empty post.destination.latitude }"> <spring:message code="post.coordinates" />: <jstl:out value="(${post.destination.latitude},${post.destination.longitude})"/></jstl:if> </p>
 
+<security:authorize access="hasRole('CUSTOMER')">
 <p><a href="application/customer/apply.do?postId=${post.id}"><b><spring:message code="post.apply"/></b></a></p>
+</security:authorize>
 
+<security:authorize access="hasRole('ADMIN')">
+<p><a href="post/administrator/ban.do?postId=${post.id}"><b><spring:message code="post.ban"/></b></a></p>
+</security:authorize>
 
 <b><spring:message code="post.comments"/></b><br/>
 

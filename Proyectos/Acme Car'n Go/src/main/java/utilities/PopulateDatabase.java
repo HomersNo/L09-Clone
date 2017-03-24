@@ -24,6 +24,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import utilities.internal.DatabaseUtil;
 import utilities.internal.EclipseConsole;
+import utilities.internal.SchemaPrinter;
 import utilities.internal.ThrowablePrinter;
 import domain.DomainEntity;
 
@@ -124,6 +125,7 @@ public class PopulateDatabase {
 
 		System.out.println();
 		databaseUtil.openTransaction();
+
 		for (final Entry<String, Object> entry : sortedEntities) {
 			name = entry.getKey();
 			entity = (DomainEntity) entry.getValue();
@@ -131,6 +133,7 @@ public class PopulateDatabase {
 			System.out.printf("> %s", name);
 			databaseUtil.persist(entity);
 			System.out.printf(": %s%n", entity.toString());
+			SchemaPrinter.print(entry);
 			// TODO: print the entity using SchemaPrinter.  This should get a map in which 
 			// every persisted entity is mapped onto the corresponding bean name in the 
 			// PopulateDatabase.xml file; otherwise traceability will be a nightmare.

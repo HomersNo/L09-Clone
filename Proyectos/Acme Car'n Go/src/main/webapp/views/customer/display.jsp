@@ -21,20 +21,16 @@
 
 <br/>
 
-<security:authorize access="hasRole('CUSTOMER')">
-	<jstl:if test="${customer.userAccount.username==loggedactor.username}">
-		<a href="customer/customer/edit.do?"> <spring:message code="customer.edit" /></a>
-	</jstl:if>
-</security:authorize>
-
-<br/>
 
 <b><spring:message code="customer.comments"/></b><br/>
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="comments" requestURI="customer/display.do" id="row">
+<security:authorize access="hasRole('CUSTOMER')">
 
-	<!-- Attributes -->
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="customerComments" requestURI="${requestURI }" id="row">
+
+	<!--Attributes -->
 	<spring:message code="comment.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader}" sortable="true" />
 
@@ -49,12 +45,54 @@
 	
 	<spring:message code="comment.actor" var="authorHeader"/>
 	<display:column title="${authorHeader}">
-		<a href="actor/display.do?actorId=${row.actor.id}"> ${row.actor.name} ${row.actor.surname}</a>
+		<a href="actor/actor/display.do?actorId=${row.actor.id}"> ${row.actor.name} ${row.actor.surname}</a>
 	</display:column>
 	
 </display:table>
 
+	
+</security:authorize>
+
+<security:authorize access="hasRole('ADMIN')">
+
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="adminComments" requestURI="${requestURI }" id="row">
+
+	<!--Attributes -->
+	<spring:message code="comment.title" var="titleHeader" />
+	<display:column property="title" title="${titleHeader}" sortable="true" />
+
+	<spring:message code="comment.text" var="textHeader" />
+	<display:column property="text" title="${textHeader}" sortable="true" />
+	
+	<spring:message code="comment.stars" var="starsHeader" />
+	<display:column property="stars" title="${starsHeader}" sortable="true" />
+
+	<spring:message code="comment.moment" var="momentHeader" />
+	<display:column property="moment" title="${momentHeader}"  format="{0,date,dd/MM/yyyy HH:mm}"/>
+	
+	<spring:message code="comment.actor" var="authorHeader"/>
+	<display:column title="${authorHeader}">
+		<a href="actor/actor/display.do?actorId=${row.actor.id}"> ${row.actor.name} ${row.actor.surname}</a>
+	</display:column>
+	
+	<spring:message code="comment.ban" var="banHeader"/>
+	<display:column title="${banHeader}">
+	<jstl:if test="${!(row.banned)}">
+		<a href="comment/administrator/ban.do?commentId=${row.id}"> ban</a>
+	</jstl:if>
+	</display:column>
+
+	
+</display:table>
+	
+</security:authorize>
 <br/>
+
+<security:authorize access="hasRole('CUSTOMER')">
+<a href="comment/actor/create.do?commentableId=${customer.id}"><spring:message code="comment.new" /></a>
+</security:authorize>
+
 
                                <!-- AQUI DEBERIA MOSTRARSE LOS POSTS Y LAS APPLICATIONS! -->
 <%-- <b><spring:message code="tenant.socials"/></b><br/>

@@ -11,8 +11,9 @@
 	
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
-	<form:hidden path="origin"/>
-	<form:hidden path="destination"/>
+	<form:hidden path="customer"/>
+	<form:hidden path="origin.id"/>
+	<form:hidden path="destination.id"/>
 	
 	<fieldset>
 		<legend><spring:message code="post.info" /></legend>
@@ -26,7 +27,7 @@
 		<form:label path="moment">
 			<spring:message code="post.moment" />:
 		</form:label>
-		<form:input placeholder="dd/MM/yyyy" path="moment" />
+		<form:input placeholder="dd/MM/yyyy HH:mm" path="moment" />
 		<form:errors cssClass="error" path="moment" />
 	
 	</fieldset>
@@ -35,15 +36,15 @@
 	<fieldset>
 		<legend><spring:message code="post.origin" /></legend>
 		<acme:textbox code="post.place.address" path="origin.address"/>
-		<acme:number max="-85" min="85" step="any" code="post.place.latitude" path="origin.latitude"/>
-		<acme:number max="-180" min="180" step="any" code="post.place.longitude" path="origin.longitude"/>
+		<acme:number max="85" min="-85" step="any" code="post.place.latitude" path="origin.latitude"/>
+		<acme:number max="180" min="-180" step="any" code="post.place.longitude" path="origin.longitude"/>
   	</fieldset>
   	
   	<fieldset>
 		<legend><spring:message code="post.destination" /></legend>
 		<acme:textbox code="post.place.address" path="destination.address"/>
-		<acme:number max="-85" min="85" step="any" code="post.place.latitude" path="destination.latitude"/>
-		<acme:number max="-180" min="180" step="any" code="post.place.longitude" path="destination.longitude"/>
+		<acme:number max="85" min="-85" step="any" code="post.place.latitude" path="destination.latitude"/>
+		<acme:number max="180" min="-180" step="any" code="post.place.longitude" path="destination.longitude"/>
   	</fieldset>
 	
 	

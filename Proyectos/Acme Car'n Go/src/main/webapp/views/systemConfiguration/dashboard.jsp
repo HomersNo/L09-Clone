@@ -131,7 +131,7 @@
 	<display:column property="email" title="${emailHeader}" sortable="true" />
 
 	<spring:message code="systemConfiguration.actor.phone" var="phoneHeader" />
-	<display:column property="phone" title="${phoneHeader}" sortable="true"/>
+	<display:column property="phoneNumber" title="${phoneHeader}" sortable="true"/>
 	
 </display:table>
 <br/>
@@ -154,7 +154,7 @@
 	<display:column property="email" title="${emailHeader}" sortable="true" />
 
 	<spring:message code="systemConfiguration.actor.phone" var="phoneHeader" />
-	<display:column property="phone" title="${phoneHeader}" sortable="true"/>
+	<display:column property="phoneNumber" title="${phoneHeader}" sortable="true"/>
 	
 </display:table>
 <br/>
@@ -177,7 +177,7 @@
 	<display:column property="email" title="${emailHeader}" sortable="true" />
 
 	<spring:message code="systemConfiguration.actor.phone" var="phoneHeader" />
-	<display:column property="phone" title="${phoneHeader}" sortable="true"/>
+	<display:column property="phoneNumber" title="${phoneHeader}" sortable="true"/>
 	
 </display:table>
 <br/>
@@ -200,7 +200,7 @@
 	<display:column property="email" title="${emailHeader}" sortable="true" />
 
 	<spring:message code="systemConfiguration.actor.phone" var="phoneHeader" />
-	<display:column property="phone" title="${phoneHeader}" sortable="true"/>
+	<display:column property="phoneNumber" title="${phoneHeader}" sortable="true"/>
 	
 </display:table>
 <br/>
@@ -223,7 +223,7 @@
 	<display:column property="email" title="${emailHeader}" sortable="true" />
 
 	<spring:message code="systemConfiguration.actor.phone" var="phoneHeader" />
-	<display:column property="phone" title="${phoneHeader}" sortable="true"/>
+	<display:column property="phoneNumber" title="${phoneHeader}" sortable="true"/>
 	
 </display:table>
 <br/>

@@ -43,6 +43,7 @@ public class PostService {
 		result = new Post();
 
 		result.setBanned(false);
+		result.setCustomer(this.customerService.findByPrincipal());
 
 		return result;
 	}
@@ -78,6 +79,22 @@ public class PostService {
 		Collection<Post> result;
 
 		result = this.postRepository.findByType("OFFER");
+
+		return result;
+	}
+
+	public Collection<Post> findAllRequestsNotBanned() {
+		Collection<Post> result;
+
+		result = this.postRepository.findByTypeNotBanned("REQUEST");
+
+		return result;
+	}
+
+	public Collection<Post> findAllOffersNotBanned() {
+		Collection<Post> result;
+
+		result = this.postRepository.findByTypeNotBanned("OFFER");
 
 		return result;
 	}

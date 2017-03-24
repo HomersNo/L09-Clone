@@ -10,9 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
+import services.CommentService;
 import services.PostService;
+import domain.Actor;
+import domain.Administrator;
+import domain.Comment;
 import domain.Post;
 import forms.FilterString;
 
@@ -26,17 +32,48 @@ public class PostController extends AbstractController {
 
 
 	@Autowired
-	private PostService	postService;
+	private PostService		postService;
+
+	@Autowired
+	private CommentService	commentService;
+
+	@Autowired
+	private ActorService	actorService;
 
 
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int postId) {
+		ModelAndView result;
+
+		Collection<Comment> adminComments;
+		Collection<Comment> customerComments;
+		Post post;
+
+		post = this.postService.findOne(postId);
+		adminComments = this.commentService.findAllByCommentableId(postId);
+		customerComments = this.commentService.findNotBannedCommentsCustomer(postId);
+
+		result = new ModelAndView("post/display");
+		result.addObject("post", post);
+		result.addObject("adminComments", adminComments);
+		result.addObject("customerComments", customerComments);
+
+		return result;
+	}
 	@RequestMapping(value = "/listRequests", method = RequestMethod.GET)
 	public ModelAndView listRequests() {
 		ModelAndView result;
 
 		Collection<Post> requests;
+		Actor principal;
 		final FilterString filter = new FilterString();
 
-		requests = this.postService.findAllRequests();
+		principal = this.actorService.findByPrincipal();
+
+		if (principal instanceof Administrator)
+			requests = this.postService.findAllRequestsNotBanned();
+		else
+			requests = this.postService.findAllRequests();
 
 		result = new ModelAndView("post/list");
 		result.addObject("requestURI", "post/listRequests.do");
@@ -52,8 +89,14 @@ public class PostController extends AbstractController {
 
 		Collection<Post> offers;
 		final FilterString filter = new FilterString();
+		Actor principal;
 
-		offers = this.postService.findAllOffers();
+		principal = this.actorService.findByPrincipal();
+
+		if (principal instanceof Administrator)
+			offers = this.postService.findAllOffersNotBanned();
+		else
+			offers = this.postService.findAllOffers();
 
 		result = new ModelAndView("post/list");
 		result.addObject("requestURI", "post/customer/listOffers.do");

@@ -59,7 +59,9 @@
 					<li class="arrow"></li>
 					<li><a href="folder/actor/list.do"><spring:message code="master.page.profile.folder.list" /></a></li>		
 					<li><a href="message/actor/create.do"><spring:message code="master.page.profile.message.create" /></a></li>
-					<li><a href="actor/display.do"><spring:message code="master.page.actor.display" /></a></li>
+					<security:authorize access="hasRole('CUSTOMER')">
+						<li><a href="actor/actor/display.do"><spring:message code="master.page.actor.display" /></a></li>
+					</security:authorize>
 					<security:authorize access="hasRole('ADMIN')">
 						<li><a><spring:message	code="master.page.administrator" /></a>
 							<ul>

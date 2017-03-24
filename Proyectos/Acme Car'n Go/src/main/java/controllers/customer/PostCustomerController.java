@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CustomerService;
@@ -81,35 +80,36 @@ public class PostCustomerController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int postId) {
-		ModelAndView result;
-
-		Post post;
-
-		post = this.postService.findOne(postId);
-
-		result = this.createEditModelAndView(post);
-
-		return result;
-	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(@Valid Post post, final BindingResult binding) {
 
 		ModelAndView result;
 
+		if (post.getOrigin().getLatitude() == null) {
+			if (post.getOrigin().getLongitude() != null)
+				binding.rejectValue("origin.latitude", "javax.validation.constraints.NotNull.message");
+		} else if (post.getOrigin().getLongitude() == null)
+			if (post.getOrigin().getLatitude() != null)
+				binding.rejectValue("origin.longitude", "javax.validation.constraints.NotNull.message");
+		if (post.getDestination().getLatitude() == null) {
+			if (post.getDestination().getLongitude() != null)
+				binding.rejectValue("destination.latitude", "javax.validation.constraints.NotNull.message");
+		} else if (post.getDestination().getLongitude() == null)
+			if (post.getDestination().getLatitude() != null)
+				binding.rejectValue("destination.longitude", "javax.validation.constraints.NotNull.message");
+
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(post);
 		else
 			try {
+
 				post = this.postService.reconstruct(post, binding);
 				post = this.postService.save(post);
 				result = new ModelAndView("redirect:/post/display.do?postId=" + post.getId());
 
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(post, "post.commit.error");
-				result.addObject("post", post);
+
 			}
 
 		return result;

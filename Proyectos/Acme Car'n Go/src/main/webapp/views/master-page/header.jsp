@@ -47,7 +47,15 @@
 			<li><a class="fNiv" href="customer/create.do"><spring:message code="master.page.register"/></a></li>	
 		</security:authorize>
 
-
+		<security:authorize access="hasRole('CUSTOMER')">
+		<li><a class="fNiv"><spring:message code="master.page.applications"/></a>
+			<ul>
+				<li class="arrow"></li>
+				<li><a href="application/customer/listReceived.do"><spring:message code="master.page.applications.received"/></a>
+				<li><a href="application/customer/listSent.do"><spring:message code="master.page.applications.sent"/></a>
+			</ul>
+		</li>
+		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
 			<li>

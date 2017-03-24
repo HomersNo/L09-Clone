@@ -142,7 +142,7 @@ public class MessageService {
 	public Double findMinSentMessagesPerActor() {
 		Assert.notNull(this.adminService.findByPrincipal());
 		Double result = 0.0;
-		result = this.messageRepository.minSentMessagesPerActor();
+		result = this.messageRepository.minSentMessagesPerActor().iterator().next();
 		return result;
 	}
 
@@ -156,14 +156,14 @@ public class MessageService {
 	public Double findMaxSentMessagesPerActor() {
 		Assert.notNull(this.adminService.findByPrincipal());
 		Double result = 0.0;
-		result = this.messageRepository.maxSentMessagesPerActor();
+		result = this.messageRepository.maxSentMessagesPerActor().iterator().next();
 		return result;
 	}
 
 	public Double findMinReceivedMessagesPerActor() {
 		Assert.notNull(this.adminService.findByPrincipal());
 		Double result = 0.0;
-		result = this.messageRepository.minReceivedMessagesPerActor();
+		result = this.messageRepository.minReceivedMessagesPerActor().iterator().next();
 		return result;
 	}
 
@@ -177,7 +177,7 @@ public class MessageService {
 	public Double findMaxReceivedMessagesPerActor() {
 		Assert.notNull(this.adminService.findByPrincipal());
 		Double result = 0.0;
-		result = this.messageRepository.maxReceivedMessagesPerActor();
+		result = this.messageRepository.maxReceivedMessagesPerActor().iterator().next();
 		return result;
 	}
 

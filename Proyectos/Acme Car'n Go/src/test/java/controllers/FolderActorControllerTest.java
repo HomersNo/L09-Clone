@@ -2,6 +2,7 @@
 package controllers;
 
 import org.hamcrest.Matchers;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -12,9 +13,15 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 import services.FolderService;
 import utilities.AbstractTest;
+import controllers.actor.FolderActorController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -29,6 +36,12 @@ public class FolderActorControllerTest extends AbstractTest {
 	private FolderService	folderServiceMock;
 
 
+	@Override
+	@Before
+	public void setUp() {
+		this.mockMvc = MockMvcBuilders.standaloneSetup(new FolderActorController()).setValidator(this.validator()).setViewResolvers(this.viewResolver()).build();
+	}
+
 	@Test
 	public void findFolderByPrincipal() throws Exception {
 		this.authenticate("customer1");
@@ -41,5 +54,19 @@ public class FolderActorControllerTest extends AbstractTest {
 		Mockito.verifyNoMoreInteractions(this.folderServiceMock);
 
 		this.unauthenticate();
+	}
+
+	private LocalValidatorFactoryBean validator() {
+		return new LocalValidatorFactoryBean();
+	}
+
+	private ViewResolver viewResolver() {
+		final InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+
+		viewResolver.setViewClass(JstlView.class);
+		viewResolver.setPrefix("/views/");
+		viewResolver.setSuffix(".jsp");
+
+		return viewResolver;
 	}
 }

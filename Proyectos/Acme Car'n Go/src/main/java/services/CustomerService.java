@@ -151,4 +151,8 @@ public class CustomerService {
 		customer = this.customerRepository.findOneByUserAccountId(userAccount.getId());
 		return customer;
 	}
+
+	public void flush() {
+		this.customerRepository.flush();
+	}
 }

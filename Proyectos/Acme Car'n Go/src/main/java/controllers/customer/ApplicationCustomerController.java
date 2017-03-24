@@ -48,7 +48,7 @@ public class ApplicationCustomerController extends AbstractController {
 
 		result = new ModelAndView("application/list");
 		result.addObject("requestURI", "application/customer/listReceived.do");
-		result.addObject("posts", applications);
+		result.addObject("applications", applications);
 
 		return result;
 	}
@@ -63,7 +63,7 @@ public class ApplicationCustomerController extends AbstractController {
 
 		result = new ModelAndView("application/list");
 		result.addObject("requestURI", "application/customer/listSent.do");
-		result.addObject("posts", applications);
+		result.addObject("applications", applications);
 
 		return result;
 	}

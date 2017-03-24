@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,6 +95,7 @@ public class PostService {
 	public Post save(final Post post) {
 		Assert.notNull(post);
 		this.checkPrincipal(post);
+		Assert.isTrue(post.getMoment().after(new Date(System.currentTimeMillis() - 1)));
 		Post result;
 
 		result = this.postRepository.save(post);

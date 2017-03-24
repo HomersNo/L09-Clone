@@ -12,7 +12,7 @@ import controllers.AbstractController;
 import domain.Post;
 
 @Controller
-@RequestMapping("/post/customer")
+@RequestMapping("/post/administrator")
 public class PostAdministratorController extends AbstractController {
 
 	public PostAdministratorController() {

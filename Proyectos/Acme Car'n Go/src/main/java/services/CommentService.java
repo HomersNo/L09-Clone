@@ -14,7 +14,6 @@ import repositories.CommentRepository;
 import domain.Actor;
 import domain.Comment;
 import domain.Commentable;
-import domain.Customer;
 
 @Service
 public class CommentService {
@@ -40,6 +39,7 @@ public class CommentService {
 
 		Comment created;
 		created = new Comment();
+		created.setBanned(false);
 		final Date moment = new Date(System.currentTimeMillis() - 100);
 		final Actor actor = this.actorService.findByPrincipal();
 		created.setActor(actor);
@@ -85,10 +85,10 @@ public class CommentService {
 
 	public Collection<Comment> findNotBannedCommentsCustomer(final int commentableId) {
 
-		final Customer principal;
+		final Actor principal;
 		final Set<Comment> result = new HashSet<Comment>();
 
-		principal = this.customerService.findByPrincipal();
+		principal = this.actorService.findByPrincipal();
 		result.addAll(this.findNotBannedComments(commentableId));
 		result.addAll(this.commentRepository.findCommentsByCustomer(principal.getId(), commentableId));
 

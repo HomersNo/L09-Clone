@@ -17,19 +17,19 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
 	Collection<Message> findAllByFolderId(int id);
 
 	@Query("select count(m) from Message m group by m.sender order by count(m) ASC")
-	Double minSentMessagesPerActor();
+	Collection<Double> minSentMessagesPerActor();
 
 	@Query("select count(m) from Message m group by m.sender order by count(m) DESC")
-	Double maxSentMessagesPerActor();
+	Collection<Double> maxSentMessagesPerActor();
 
 	@Query("select count(m)*1.0/(select count(m.sender)*1.0 from Message m) from Message m")
 	Double avgSentMessagesPerActor();
 
 	@Query("select count(m) from Message m group by m.recipient order by count(m) ASC")
-	Double minReceivedMessagesPerActor();
+	Collection<Double> minReceivedMessagesPerActor();
 
 	@Query("select count(m) from Message m group by m.recipient order by count(m) DESC")
-	Double maxReceivedMessagesPerActor();
+	Collection<Double> maxReceivedMessagesPerActor();
 
 	@Query("select count(m)*1.0/(select count(m.recipient)*1.0 from Message m) from Message m")
 	Double avgReceivedMessagesPerActor();

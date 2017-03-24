@@ -38,8 +38,8 @@ public class SampleTest extends AbstractTest {
 	@Test
 	public void samplePositiveTest() {
 		Assert.isTrue(true);
-	}
 
+	}
 	@Test(expected = IllegalArgumentException.class)
 	public void sampleNegativeTest() {
 		Assert.isTrue(false);

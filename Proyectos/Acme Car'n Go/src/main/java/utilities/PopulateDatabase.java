@@ -10,10 +10,14 @@
 
 package utilities;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import javax.persistence.Entity;
 
@@ -24,7 +28,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import utilities.internal.DatabaseUtil;
 import utilities.internal.EclipseConsole;
-import utilities.internal.SchemaPrinter;
 import utilities.internal.ThrowablePrinter;
 import domain.DomainEntity;
 
@@ -123,23 +126,39 @@ public class PopulateDatabase {
 		String name;
 		DomainEntity entity;
 
-		System.out.println();
-		databaseUtil.openTransaction();
+		final Properties properties = new Properties();
+		OutputStream output = null;
 
-		for (final Entry<String, Object> entry : sortedEntities) {
-			name = entry.getKey();
-			entity = (DomainEntity) entry.getValue();
+		try {
+			output = new FileOutputStream("src\\main\\resources\\populate.properties");
 
-			System.out.printf("> %s", name);
-			databaseUtil.persist(entity);
-			System.out.printf(": %s%n", entity.toString());
-			SchemaPrinter.print(entry);
-			// TODO: print the entity using SchemaPrinter.  This should get a map in which 
-			// every persisted entity is mapped onto the corresponding bean name in the 
-			// PopulateDatabase.xml file; otherwise traceability will be a nightmare.
+			System.out.println();
+			databaseUtil.openTransaction();
+
+			for (final Entry<String, Object> entry : sortedEntities) {
+				name = entry.getKey();
+				entity = (DomainEntity) entry.getValue();
+
+				System.out.printf("> %s", name);
+				databaseUtil.persist(entity);
+				System.out.printf(": %s%n", entity.toString());
+				properties.setProperty(name, String.valueOf(entity.getId()));
+
+			}
+			properties.store(output, null);
+			databaseUtil.closeTransaction();
+			System.out.println();
+
+		} catch (final IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (output != null)
+				try {
+					output.close();
+				} catch (final IOException e) {
+					e.printStackTrace();
+				}
 		}
-		databaseUtil.closeTransaction();
-		System.out.println();
 	}
 
 	protected static void cleanEntities(final LinkedList<Entry<String, Object>> result) {

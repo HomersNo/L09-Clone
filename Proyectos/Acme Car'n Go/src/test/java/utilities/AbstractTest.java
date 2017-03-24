@@ -10,8 +10,14 @@
 
 package utilities;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
@@ -25,13 +31,40 @@ public abstract class AbstractTest {
 	// Supporting services --------------------------------
 
 	@Autowired
-	private LoginService	loginService;
+	private LoginService		loginService;
+
+	private static Properties	prop;
 
 
 	// Set up and tear down -------------------------------
 
+	@BeforeClass
+	public static void setUpClass() {
+		AbstractTest.prop = new Properties();
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream("src/main/resources/populate.properties");
+
+			// load a properties file
+			AbstractTest.prop.load(input);
+
+		} catch (final IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null)
+				try {
+					input.close();
+				} catch (final IOException e) {
+					e.printStackTrace();
+				}
+		}
+	}
+
 	@Before
 	public void setUp() {
+
 	}
 
 	@After
@@ -67,6 +100,14 @@ public abstract class AbstractTest {
 			throw new RuntimeException(caught.getName() + " was unexpected");
 		else if (expected != null && caught != null && !expected.equals(caught))
 			throw new RuntimeException(expected.getName() + " was expected, but " + caught.getName() + " was thrown");
+	}
+
+	public int extract(final String beanName) {
+		int result;
+
+		result = Integer.valueOf(AbstractTest.prop.getProperty(beanName));
+
+		return result;
 	}
 
 }

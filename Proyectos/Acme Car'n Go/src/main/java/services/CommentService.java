@@ -139,4 +139,9 @@ public class CommentService {
 
 		return result;
 	}
+
+	public void flush() {
+		commentRepository.flush();
+		
+	}
 }

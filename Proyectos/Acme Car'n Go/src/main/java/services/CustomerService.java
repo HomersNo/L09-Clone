@@ -32,6 +32,9 @@ public class CustomerService {
 	@Autowired
 	private Validator			validator;
 
+	@Autowired
+	private FolderService		folderService;
+
 
 	// Constructors -------------------------------------------------
 	public CustomerService() {
@@ -54,7 +57,6 @@ public class CustomerService {
 
 		return created;
 	}
-
 	public Collection<Customer> findAll() {
 		Collection<Customer> result;
 
@@ -137,15 +139,20 @@ public class CustomerService {
 		customer.getUserAccount().setPassword(pass);
 
 		result = this.customerRepository.save(customer);
+		this.folderService.initFolders(result);
 
 		return result;
 	}
 
 	public Customer findByPrincipal() {
 
-		UserAccount userAccount = LoginService.getPrincipal();
+		final UserAccount userAccount = LoginService.getPrincipal();
 		Customer customer;
-		customer = customerRepository.findOneByUserAccountId(userAccount.getId());
+		customer = this.customerRepository.findOneByUserAccountId(userAccount.getId());
 		return customer;
+	}
+
+	public void flush() {
+		this.customerRepository.flush();
 	}
 }

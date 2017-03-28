@@ -17,6 +17,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
 <form:form action="message/actor/edit.do" modelAttribute="message">
@@ -60,6 +61,8 @@
 	</form:select>
 	<form:errors cssClass="error" path="recipient" />
 	<br />
+	
+	<acme:textbox code="message.attachment" path="attachment"/>
 
 
 	<input type="submit" name="save"

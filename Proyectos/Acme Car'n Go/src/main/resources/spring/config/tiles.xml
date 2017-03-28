@@ -32,6 +32,8 @@
 		<value>/views/systemConfiguration/tiles.xml</value>
 		<value>/views/comment/tiles.xml</value>
 		
+		<value>/views/terms/tiles.xml</value>
+		
 	</util:list>
 
 </beans>

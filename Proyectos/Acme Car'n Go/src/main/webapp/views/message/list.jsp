@@ -44,6 +44,11 @@
 	<spring:message code="message.body" var="bodyHeader" />
 	<display:column property="text" title="${bodyHeader}" sortable="false" />
 	
+	<spring:message code="message.attachment" var="attachmentHeader"/>
+	<display:column title="${attachmentHeader}">
+		<a href="${row.attachment}">${row.attachment}</a>
+	</display:column> 
+	
 	
 	
 	<spring:message code="message.sender" var="senderHeader"/>

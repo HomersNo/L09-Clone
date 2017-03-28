@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.MessageRepository;
-import security.LoginService;
-import security.UserAccount;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
@@ -90,6 +88,7 @@ public class MessageService {
 		this.checkPrincipal(message);
 
 		this.messageRepository.delete(message);
+
 	}
 
 	//Business methods
@@ -145,7 +144,7 @@ public class MessageService {
 	}
 
 	public void checkPrincipal(final Message message) {
-		final UserAccount actor = LoginService.getPrincipal();
+		final Actor actor = this.actorService.findByPrincipal();
 
 		Assert.isTrue(actor.equals(message.getSender()) || actor.equals(message.getRecipient()));
 	}

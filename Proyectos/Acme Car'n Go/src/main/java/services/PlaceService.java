@@ -66,4 +66,8 @@ public class PlaceService {
 		this.placeRepository.delete(place);
 	}
 
+	public void flush() {
+		this.placeRepository.flush();
+	}
+
 }

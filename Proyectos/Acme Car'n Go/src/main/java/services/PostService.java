@@ -102,6 +102,8 @@ public class PostService {
 
 	public Collection<Post> findAllFiltered(final String filter) {
 		Collection<Post> posts;
+		Assert.notNull(filter);
+		Assert.notNull(this.customerService.findByPrincipal());
 
 		posts = this.postRepository.findAllFiltered(filter);
 
@@ -110,8 +112,9 @@ public class PostService {
 
 	public Post save(final Post post) {
 		Assert.notNull(post);
-		this.checkPrincipal(post);
 		Assert.isTrue(post.getMoment().after(new Date(System.currentTimeMillis() - 1)));
+		this.checkPrincipal(post);
+
 		Post result;
 
 		result = this.postRepository.save(post);
@@ -187,6 +190,10 @@ public class PostService {
 		Double result = 0.0;
 		result = this.postRepository.avgPostsPerCustomer();
 		return result;
+	}
+
+	public void flush() {
+		this.postRepository.flush();
 	}
 
 }

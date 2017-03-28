@@ -62,10 +62,20 @@ public class MessageService {
 
 		return result;
 	}
+	
+	public Collection<Message> findAll() {
+		return messageRepository.findAll();
+	}
 
 	public Collection<Message> findAllByFolder(final int folderId) {
 		Collection<Message> result;
 		this.folderService.checkPrincipal(folderId);
+		result = this.messageRepository.findAllByFolderId(folderId);
+		return result;
+	}
+	
+	public Collection<Message> findAllByFolderWithNoCheck(final int folderId) {
+		Collection<Message> result;
 		result = this.messageRepository.findAllByFolderId(folderId);
 		return result;
 	}
@@ -118,6 +128,11 @@ public class MessageService {
 		message.setFolder(folder);
 		result = this.messageRepository.save(message);
 		return result;
+	}
+	
+	public void flush() {
+		messageRepository.flush();
+		
 	}
 
 	// Principal Checkers

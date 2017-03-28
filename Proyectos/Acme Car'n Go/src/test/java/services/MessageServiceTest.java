@@ -43,13 +43,14 @@ public class MessageServiceTest extends AbstractTest {
 	// Tests ---------------------------------------------------------------
 	//An actor who is authenticated must be able to:
 	//	o Exchange messages with other actors.
+	//	o Erase his or her messages, which requires previous confirmation
 	@Test
 	public void driverCreation() {
 		final Object testingData[][] = {
 			{		// Creación correcta de un Message.
 				"customer1", "correcto", "correcto", "http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png", new Date(System.currentTimeMillis() - 100), null
 			}, {	// Creación correcta de un Message.
-				"admin1", "incorrecto", "incorrecto", "http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png", new Date(System.currentTimeMillis() - 100), null
+				"admin", "incorrecto", "incorrecto", "http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png", new Date(System.currentTimeMillis() - 100), null
 			}, {	// Creación errónea de un Message: title vacío.
 				"customer1", "", "incorrecto", "http://www.bouncepen.com/wp-content/themes/twentyfifteen/uploads/user-photo/dummy-image.png", new Date(System.currentTimeMillis() - 100), ConstraintViolationException.class
 			}, {	// Creación errónea de un Message: text vacío.
@@ -68,19 +69,15 @@ public class MessageServiceTest extends AbstractTest {
 	}
 
 	//- An actor who is authenticated must be able to:
-	//	o List the messages that he or she’s got and reply to them.
-	//	o List the messages that he or she’s got and forward them
+	//	o List the messages that he or she's got and reply to them.
+	//	o List the messages that he or she's got and forward them
 	@Test
 	public void driverFindAllByFolderId() {
 		final Object testingData[][] = {
 			{		
-				"admin1", "Inbox", null
+				"admin", "Inbox", null
 			}, {		
-				"admin1", "Outbox", null
-			}, {		
-				"admin2", "Inbox", null
-			}, {		
-				"admin2", "Outbox", null
+				"admin", "Outbox", null
 			}, {		
 				"customer1", "Inbox", null
 			}, {		
@@ -138,6 +135,9 @@ public class MessageServiceTest extends AbstractTest {
 				}
 			}
 			messageService.delete(m);
+			
+			Collection<Message> all = messageService.findAll();
+			Assert.isTrue(!(all.contains(m)));
 			
 			this.messageService.flush();
 			unauthenticate();

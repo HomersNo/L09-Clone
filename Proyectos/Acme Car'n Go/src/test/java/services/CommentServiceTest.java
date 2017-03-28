@@ -71,7 +71,7 @@ public class CommentServiceTest extends AbstractTest {
 			}, {	//alguien intenta banear un comentario
 				null, IllegalArgumentException.class
 			}, {	//alguien intenta banear un comentario
-				"admin1", null
+				"admin", null
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)

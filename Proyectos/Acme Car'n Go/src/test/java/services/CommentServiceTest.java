@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.Date;
@@ -11,10 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import utilities.AbstractTest;
 import domain.Comment;
 import domain.Commentable;
 import domain.Customer;
-import utilities.AbstractTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -25,10 +26,11 @@ public class CommentServiceTest extends AbstractTest {
 
 	// The SUT -------------------------------------------------------------
 	@Autowired
-	private CommentService commentService;
-	
+	private CommentService	commentService;
+
 	@Autowired
-	private CustomerService customerService;
+	private CustomerService	customerService;
+
 
 	// Teoria pagina 107 y 108
 	// Tests ---------------------------------------------------------------
@@ -54,7 +56,7 @@ public class CommentServiceTest extends AbstractTest {
 		for (int i = 0; i < testingData.length; i++)
 			this.templateCreation((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Integer) testingData[i][3], (Date) testingData[i][4], (Boolean) testingData[i][5], (Class<?>) testingData[i][6]);
 	}
-	
+
 	@Test
 	public void driverBan() {
 		final Object testingData[][] = {
@@ -72,8 +74,8 @@ public class CommentServiceTest extends AbstractTest {
 		Class<?> caught;
 		caught = null;
 		try {
-			authenticate(username);
-			Customer cus = customerService.findOne(84);
+			this.authenticate(username);
+			final Customer cus = this.customerService.findOne(this.extract("customer2"));
 			final Commentable com = cus;
 			final Comment c = this.commentService.create(com);
 			c.setBanned(banned);
@@ -82,30 +84,30 @@ public class CommentServiceTest extends AbstractTest {
 			c.setStars(stars);
 			c.setText(text);
 			c.setTitle(title);
-			
+
 			this.commentService.save(c);
 			this.commentService.flush();
-			unauthenticate();
+			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 		this.checkExceptions(expected, caught);
 	}
-	
-	protected void templateBan(final String username, final Class<?> expected){
+
+	protected void templateBan(final String username, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
-		
+
 		try {
-		authenticate(username);
-		Customer cus = customerService.findOne(84);
-		Commentable commentable = cus;
-		Comment comment = commentService.create(commentable);
-		this.commentService.banComment(comment);
-		unauthenticate();
-		
-		this.commentService.flush();
-		
+			this.authenticate(username);
+			final Customer cus = this.customerService.findOne(this.extract("customer2"));
+			final Commentable commentable = cus;
+			final Comment comment = this.commentService.create(commentable);
+			this.commentService.banComment(comment);
+			this.unauthenticate();
+
+			this.commentService.flush();
+
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}

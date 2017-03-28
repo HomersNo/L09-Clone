@@ -14,12 +14,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.SystemConfigurationService;
+import domain.Actor;
 
 @Controller
 @RequestMapping("/welcome")
@@ -35,6 +38,9 @@ public class WelcomeController extends AbstractController {
 	@Autowired
 	SystemConfigurationService	scService;
 
+	@Autowired
+	ActorService				actorService;
+
 
 	// Index ------------------------------------------------------------------		
 
@@ -43,6 +49,7 @@ public class WelcomeController extends AbstractController {
 
 		ModelAndView result;
 		SimpleDateFormat formatter;
+		String name1 = "guest";
 		String moment;
 		String banner;
 
@@ -51,17 +58,17 @@ public class WelcomeController extends AbstractController {
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());
 
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		final Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		result = new ModelAndView("welcome/index");
 		if (principal != "anonymousUser") {
 
-			Actor actor = actorService.findByPrincipal();
-			name = actor.getName() + " " + actor.getSurname();
+			final Actor actor = this.actorService.findByPrincipal();
+			name1 = actor.getName() + " " + actor.getSurname();
 			result.addObject("actor", actor);
 		}
 
-		result.addObject("name", name);
+		result.addObject("name", name1);
 		result.addObject("moment", moment);
 		result.addObject("banner", banner);
 

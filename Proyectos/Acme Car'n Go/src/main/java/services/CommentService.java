@@ -45,6 +45,7 @@ public class CommentService {
 		created.setActor(actor);
 		created.setMoment(moment);
 		created.setCommentable(commentable);
+		created.setBanned(false);
 		return created;
 	}
 
@@ -138,5 +139,10 @@ public class CommentService {
 		result = this.save(comment);
 
 		return result;
+	}
+
+	public void flush() {
+		this.commentRepository.flush();
+
 	}
 }

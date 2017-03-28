@@ -3,8 +3,11 @@ package controllers.administrator;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,6 +47,26 @@ public class SystemConfigurationAdministratorController extends AbstractControll
 		systemConfiguration = this.systemConfigurationService.findMain();
 		result = this.createEditModelAndView(systemConfiguration);
 
+		result.addObject("systemConfiguration", systemConfiguration);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid SystemConfiguration systemConfiguration, final BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(systemConfiguration);
+		else
+			try {
+				if (binding.hasErrors())
+					result = this.createEditModelAndView(systemConfiguration);
+				systemConfiguration = this.systemConfigurationService.save(systemConfiguration);
+				result = new ModelAndView("redirect:/welcome/index.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(systemConfiguration, "systemConfiguration.commit.error");
+			}
 		return result;
 	}
 

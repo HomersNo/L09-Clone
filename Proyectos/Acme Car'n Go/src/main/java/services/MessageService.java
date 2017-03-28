@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.MessageRepository;
-import security.LoginService;
-import security.UserAccount;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
@@ -84,6 +82,7 @@ public class MessageService {
 		this.checkPrincipal(message);
 
 		this.messageRepository.delete(message);
+
 	}
 
 	//Business methods
@@ -134,7 +133,7 @@ public class MessageService {
 	}
 
 	public void checkPrincipal(final Message message) {
-		final UserAccount actor = LoginService.getPrincipal();
+		final Actor actor = this.actorService.findByPrincipal();
 
 		Assert.isTrue(actor.equals(message.getSender()) || actor.equals(message.getRecipient()));
 	}
@@ -142,7 +141,7 @@ public class MessageService {
 	public Double findMinSentMessagesPerActor() {
 		Assert.notNull(this.adminService.findByPrincipal());
 		Double result = 0.0;
-		result = this.messageRepository.minSentMessagesPerActor();
+		result = this.messageRepository.minSentMessagesPerActor().iterator().next();
 		return result;
 	}
 
@@ -156,14 +155,14 @@ public class MessageService {
 	public Double findMaxSentMessagesPerActor() {
 		Assert.notNull(this.adminService.findByPrincipal());
 		Double result = 0.0;
-		result = this.messageRepository.maxSentMessagesPerActor();
+		result = this.messageRepository.maxSentMessagesPerActor().iterator().next();
 		return result;
 	}
 
 	public Double findMinReceivedMessagesPerActor() {
 		Assert.notNull(this.adminService.findByPrincipal());
 		Double result = 0.0;
-		result = this.messageRepository.minReceivedMessagesPerActor();
+		result = this.messageRepository.minReceivedMessagesPerActor().iterator().next();
 		return result;
 	}
 
@@ -177,7 +176,7 @@ public class MessageService {
 	public Double findMaxReceivedMessagesPerActor() {
 		Assert.notNull(this.adminService.findByPrincipal());
 		Double result = 0.0;
-		result = this.messageRepository.maxReceivedMessagesPerActor();
+		result = this.messageRepository.maxReceivedMessagesPerActor().iterator().next();
 		return result;
 	}
 

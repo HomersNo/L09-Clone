@@ -62,6 +62,10 @@ public class MessageService {
 
 		return result;
 	}
+	
+	public Collection<Message> findAll() {
+		return messageRepository.findAll();
+	}
 
 	public Collection<Message> findAllByFolder(final int folderId) {
 		Collection<Message> result;

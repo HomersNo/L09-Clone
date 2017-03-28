@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -101,6 +102,8 @@ public class PostService {
 
 	public Collection<Post> findAllFiltered(final String filter) {
 		Collection<Post> posts;
+		Assert.notNull(filter);
+		Assert.notNull(this.customerService.findByPrincipal());
 
 		posts = this.postRepository.findAllFiltered(filter);
 
@@ -109,6 +112,7 @@ public class PostService {
 
 	public Post save(final Post post) {
 		Assert.notNull(post);
+		Assert.isTrue(post.getMoment().after(new Date()));
 		this.checkPrincipal(post);
 		Post result;
 
@@ -185,6 +189,10 @@ public class PostService {
 		Double result = 0.0;
 		result = this.postRepository.avgPostsPerCustomer();
 		return result;
+	}
+	
+	public void flush() {
+		this.postRepository.flush();
 	}
 
 }

@@ -59,7 +59,7 @@ public class Message extends DomainEntity {
 	public void setMoment(final Date moment) {
 		this.moment = moment;
 	}
-
+	
 	@URL
 	public String getAttachment() {
 		return this.attachment;

@@ -21,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(indexes = {
-	@Index(columnList = "commentable_id"), @Index(columnList = "actor_id")
+	@Index(columnList = "commentable_id"), @Index(columnList = "actor_id"), @Index(columnList = "banned")
 })
 public class Comment extends DomainEntity {
 

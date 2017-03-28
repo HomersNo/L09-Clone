@@ -4,12 +4,17 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {
+	@Index(columnList = "address")
+})
 public class Place extends DomainEntity {
 
 	public Place() {
@@ -36,7 +41,7 @@ public class Place extends DomainEntity {
 		return this.longitude;
 	}
 
-	public void setLongitude(Double longitude) {
+	public void setLongitude(final Double longitude) {
 		this.longitude = longitude;
 	}
 
@@ -45,7 +50,7 @@ public class Place extends DomainEntity {
 		return this.latitude;
 	}
 
-	public void setLatitude(Double latitude) {
+	public void setLatitude(final Double latitude) {
 		this.latitude = latitude;
 	}
 

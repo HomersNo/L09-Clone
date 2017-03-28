@@ -69,6 +69,12 @@ public class MessageService {
 		result = this.messageRepository.findAllByFolderId(folderId);
 		return result;
 	}
+	
+	public Collection<Message> findAllByFolderWithNoCheck(final int folderId) {
+		Collection<Message> result;
+		result = this.messageRepository.findAllByFolderId(folderId);
+		return result;
+	}
 
 	//	public Message save(Message message){
 	//		Message result;
@@ -118,6 +124,11 @@ public class MessageService {
 		message.setFolder(folder);
 		result = this.messageRepository.save(message);
 		return result;
+	}
+	
+	public void flush() {
+		messageRepository.flush();
+		
 	}
 
 	// Principal Checkers

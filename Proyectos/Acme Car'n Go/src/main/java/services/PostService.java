@@ -114,6 +114,7 @@ public class PostService {
 		Assert.notNull(post);
 		Assert.isTrue(post.getMoment().after(new Date()));
 		this.checkPrincipal(post);
+
 		Post result;
 
 		result = this.postRepository.save(post);
@@ -190,7 +191,7 @@ public class PostService {
 		result = this.postRepository.avgPostsPerCustomer();
 		return result;
 	}
-	
+
 	public void flush() {
 		this.postRepository.flush();
 	}

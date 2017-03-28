@@ -19,7 +19,7 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="post/customer/filter.do" modelAttribute="filterString">
+<form:form action="post/filter.do" modelAttribute="filterString">
 	<acme:textbox code="post.filter" path="filter"/>
 	
 	<acme:submit name="filterButton" code="post.search"/>
@@ -48,6 +48,15 @@
 	<display:column>
 		<a href="customer/display.do?customerId=${row.customer.id}">${row.customer.name} ${row.customer.surname}</a>
 	</display:column>
+	
+	<security:authorize access="hasRole('ADMIN')">
+	<spring:message code="comment.ban" var="banHeader"/>
+	<display:column title="${banHeader}">
+	<jstl:if test="${row.banned eq false}">
+		<a href="post/administrator/ban.do?postId=${row.id}"> ban</a>
+	</jstl:if>
+	</display:column>
+	</security:authorize>
 
 </display:table>
 

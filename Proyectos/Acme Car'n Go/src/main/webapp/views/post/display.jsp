@@ -34,8 +34,19 @@
 
 <p> <spring:message code="post.journey.to" />: <jstl:out value="${post.destination.address}" />.<jstl:if test="${not empty post.destination.latitude }"> <spring:message code="post.coordinates" />: <jstl:out value="(${post.destination.latitude},${post.destination.longitude})"/></jstl:if> </p>
 
+<security:authorize access="hasRole('CUSTOMER')">
+<p><a href="application/customer/apply.do?postId=${post.id}"><b><spring:message code="post.apply"/></b></a></p>
+</security:authorize>
+
+<security:authorize access="hasRole('ADMIN')">
+<jstl:if test="${!(post.banned)}">
+<p><a href="post/administrator/ban.do?postId=${post.id}"><b><spring:message code="post.ban"/></b></a></p>
+</jstl:if>
+</security:authorize>
 
 <b><spring:message code="post.comments"/></b><br/>
+
+
 
 <security:authorize access="hasRole('CUSTOMER')">
 
@@ -91,7 +102,9 @@
 	
 	<spring:message code="comment.ban" var="banHeader"/>
 	<display:column title="${banHeader}">
+	<jstl:if test="${row.banned eq false}">
 		<a href="comment/administrator/ban.do?commentId=${row.id}"> ban</a>
+	</jstl:if>
 	</display:column>
 	
 </display:table>
@@ -101,7 +114,5 @@
 <br/>
 
 <security:authorize access="hasRole('CUSTOMER')">
-<jstl:if test="${row.banned eq false}">
 	<a href="comment/actor/create.do?commentableId=${post.id}"><spring:message code="comment.new" /></a>
-</jstl:if>
 </security:authorize>

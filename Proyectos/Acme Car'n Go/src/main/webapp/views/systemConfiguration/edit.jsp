@@ -17,18 +17,26 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form method="post" action="systemConfiguration/administrator/setBanner.do">
-	<label><spring:message code="systemConfiguration.banner" /></label>
-	<input type="text" name="banner" id="banner"><br />
-	<input type="submit" name="changeBanner"
-		value="<spring:message code="systemConfiguration.change.banner" />" /><br />
-</form>
-<br />
+<form:form action="${requestURI}" modelAttribute="systemConfiguration">
 
-<jstl:if test="${admin.id == 0}">
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+
+	<acme:textbox code="systemConfiguration.banner" path="banner"/>
+	
+	<br>
+	<jstl:if test="${admin.id != 0}">
+	<input type="submit" name="save"
+		value="<spring:message code="systemConfiguration.save" />" 
+		onclick="javascript: relativeRedir('welcome/index.do');" />&nbsp;
+	</jstl:if>
+
+<jstl:if test="${admin.id != 0}">
 	<input type="button" name="cancel"
 		value="<spring:message code="systemConfiguration.cancel" />"
-		onclick="javascript: relativeRedir('welcome/index.do');" />
+		onclick="location.href = 'welcome/index.do';" />&nbsp;
 </jstl:if>
 <br />
+</form:form>

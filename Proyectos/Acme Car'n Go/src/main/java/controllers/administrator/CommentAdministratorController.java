@@ -43,7 +43,7 @@ public class CommentAdministratorController extends AbstractController {
 
 			comment = this.commentService.findOne(commentId);
 			comment = this.commentService.banComment(comment);
-			result = new ModelAndView("redirect:/welcome/index.do");
+			result = new ModelAndView("redirect:/commentable/actor/display.do?commentableId=" + comment.getCommentable().getId());
 		} catch (final Throwable oops) {
 
 			result = new ModelAndView("redirect:/welcome/index.do");
@@ -52,5 +52,4 @@ public class CommentAdministratorController extends AbstractController {
 
 		return result;
 	}
-
 }

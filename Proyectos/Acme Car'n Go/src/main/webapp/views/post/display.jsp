@@ -39,7 +39,9 @@
 </security:authorize>
 
 <security:authorize access="hasRole('ADMIN')">
+<jstl:if test="${!(post.banned)}">
 <p><a href="post/administrator/ban.do?postId=${post.id}"><b><spring:message code="post.ban"/></b></a></p>
+</jstl:if>
 </security:authorize>
 
 <b><spring:message code="post.comments"/></b><br/>

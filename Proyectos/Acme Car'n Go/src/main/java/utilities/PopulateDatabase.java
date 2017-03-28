@@ -126,11 +126,13 @@ public class PopulateDatabase {
 		String name;
 		DomainEntity entity;
 
+		//Properties object Definition
 		final Properties properties = new Properties();
 		OutputStream output = null;
 
 		try {
-			output = new FileOutputStream("src\\main\\resources\\populate.properties");
+			// Output file definition
+			output = new FileOutputStream("src\\test\\resources\\populate.properties");
 
 			System.out.println();
 			databaseUtil.openTransaction();
@@ -142,9 +144,11 @@ public class PopulateDatabase {
 				System.out.printf("> %s", name);
 				databaseUtil.persist(entity);
 				System.out.printf(": %s%n", entity.toString());
+				//Add the bean with the identifier to the object
 				properties.setProperty(name, String.valueOf(entity.getId()));
 
 			}
+			// Print the file
 			properties.store(output, null);
 			databaseUtil.closeTransaction();
 			System.out.println();

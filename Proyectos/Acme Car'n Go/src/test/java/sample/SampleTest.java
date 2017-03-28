@@ -37,6 +37,7 @@ public class SampleTest extends AbstractTest {
 
 	@Test
 	public void samplePositiveTest() {
+		System.out.println(this.extract("customer1"));
 		Assert.isTrue(true);
 
 	}

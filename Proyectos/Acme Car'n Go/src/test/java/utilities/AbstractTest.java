@@ -45,7 +45,7 @@ public abstract class AbstractTest {
 
 		try {
 
-			input = new FileInputStream("src/main/resources/populate.properties");
+			input = new FileInputStream("src/test/resources/populate.properties");
 
 			// load a properties file
 			AbstractTest.prop.load(input);

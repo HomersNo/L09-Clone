@@ -48,6 +48,15 @@
 	<display:column>
 		<a href="customer/display.do?customerId=${row.customer.id}">${row.customer.name} ${row.customer.surname}</a>
 	</display:column>
+	
+	<security:authorize access="hasRole('ADMIN')">
+	<spring:message code="comment.ban" var="banHeader"/>
+	<display:column title="${banHeader}">
+	<jstl:if test="${row.banned eq false}">
+		<a href="post/administrator/ban.do?postId=${row.id}"> ban</a>
+	</jstl:if>
+	</display:column>
+	</security:authorize>
 
 </display:table>
 

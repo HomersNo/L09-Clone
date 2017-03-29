@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.MessageRepository;
-import security.LoginService;
-import security.UserAccount;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
@@ -64,10 +62,20 @@ public class MessageService {
 
 		return result;
 	}
+	
+	public Collection<Message> findAll() {
+		return messageRepository.findAll();
+	}
 
 	public Collection<Message> findAllByFolder(final int folderId) {
 		Collection<Message> result;
 		this.folderService.checkPrincipal(folderId);
+		result = this.messageRepository.findAllByFolderId(folderId);
+		return result;
+	}
+	
+	public Collection<Message> findAllByFolderWithNoCheck(final int folderId) {
+		Collection<Message> result;
 		result = this.messageRepository.findAllByFolderId(folderId);
 		return result;
 	}
@@ -84,6 +92,7 @@ public class MessageService {
 		this.checkPrincipal(message);
 
 		this.messageRepository.delete(message);
+
 	}
 
 	//Business methods
@@ -120,6 +129,11 @@ public class MessageService {
 		result = this.messageRepository.save(message);
 		return result;
 	}
+	
+	public void flush() {
+		messageRepository.flush();
+		
+	}
 
 	// Principal Checkers
 
@@ -134,7 +148,7 @@ public class MessageService {
 	}
 
 	public void checkPrincipal(final Message message) {
-		final UserAccount actor = LoginService.getPrincipal();
+		final Actor actor = this.actorService.findByPrincipal();
 
 		Assert.isTrue(actor.equals(message.getSender()) || actor.equals(message.getRecipient()));
 	}

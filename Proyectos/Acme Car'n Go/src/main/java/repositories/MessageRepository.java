@@ -16,20 +16,20 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
 	@Query("select m from Message m where m.folder.id = ?1")
 	Collection<Message> findAllByFolderId(int id);
 
-	@Query("select count(m) from Message m group by m.sender order by count(m) ASC")
-	Double minSentMessagesPerActor();
+	@Query("select count(m)*1.0 from Message m group by m.sender order by count(m) ASC")
+	Collection<Double> minSentMessagesPerActor();
 
-	@Query("select count(m) from Message m group by m.sender order by count(m) DESC")
-	Double maxSentMessagesPerActor();
+	@Query("select count(m)*1.0 from Message m group by m.sender order by count(m) DESC")
+	Collection<Double> maxSentMessagesPerActor();
 
 	@Query("select count(m)*1.0/(select count(m.sender)*1.0 from Message m) from Message m")
 	Double avgSentMessagesPerActor();
 
-	@Query("select count(m) from Message m group by m.recipient order by count(m) ASC")
-	Double minReceivedMessagesPerActor();
+	@Query("select count(m)*1.0 from Message m group by m.recipient order by count(m) ASC")
+	Collection<Double> minReceivedMessagesPerActor();
 
-	@Query("select count(m) from Message m group by m.recipient order by count(m) DESC")
-	Double maxReceivedMessagesPerActor();
+	@Query("select count(m)*1.0 from Message m group by m.recipient order by count(m) DESC")
+	Collection<Double> maxReceivedMessagesPerActor();
 
 	@Query("select count(m)*1.0/(select count(m.recipient)*1.0 from Message m) from Message m")
 	Double avgReceivedMessagesPerActor();

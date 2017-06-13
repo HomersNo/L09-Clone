@@ -138,6 +138,18 @@ public class PostService {
 		return result;
 	}
 
+	public Collection<Post> findAllRequestByCustomer(final Customer customer) {
+		Collection<Post> result;
+		result = this.postRepository.findAllRequestByCustomerId(customer.getId());
+		return result;
+	}
+
+	public Collection<Post> findAllOfferByCustomer(final Customer customer) {
+		Collection<Post> result;
+		result = this.postRepository.findAllOfferByCustomerId(customer.getId());
+		return result;
+	}
+
 	public void ban(final Post post) {
 		post.setBanned(true);
 		Assert.isTrue(this.adminService.findByPrincipal() != null);

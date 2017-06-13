@@ -26,7 +26,7 @@
 <h1><jstl:out value="${post.type}"/></h1>
 <h2><jstl:out value="${post.title}"></jstl:out></h2>
 
-<spring:message code="post.author.text" />: <a href="customer/display.do?customerId=${post.customer.id}" ><jstl:out value="${post.customer.name} ${post.customer.surname}"/> </a>
+<spring:message code="post.author.text" />: <a href="customer/actor/display.do?customerId=${post.customer.id}" ><jstl:out value="${post.customer.name} ${post.customer.surname}"/> </a>
 <p><jstl:out value="${post.description}"></jstl:out> </p>
 <p><spring:message code="post.at" /> <jstl:out value="${post.moment}"/></p>
 
@@ -102,7 +102,7 @@
 	
 	<spring:message code="comment.ban" var="banHeader"/>
 	<display:column title="${banHeader}">
-	<jstl:if test="${row.banned eq false}">
+	<jstl:if test="${row.banned eq false || row.banned == null}">
 		<a href="comment/administrator/ban.do?commentId=${row.id}"> ban</a>
 	</jstl:if>
 	</display:column>

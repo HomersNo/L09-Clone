@@ -46,7 +46,7 @@
 	</display:column>
 	
 	<display:column>
-		<a href="customer/display.do?customerId=${row.customer.id}">${row.customer.name} ${row.customer.surname}</a>
+		<a href="customer/actor/display.do?customerId=${row.customer.id}">${row.customer.name} ${row.customer.surname}</a>
 	</display:column>
 	
 	<security:authorize access="hasRole('ADMIN')">

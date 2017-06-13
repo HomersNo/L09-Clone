@@ -2,6 +2,8 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -19,6 +21,7 @@ import services.PostService;
 import domain.Actor;
 import domain.Administrator;
 import domain.Comment;
+import domain.Customer;
 import domain.Post;
 import forms.FilterString;
 
@@ -72,8 +75,18 @@ public class PostController extends AbstractController {
 
 		if (principal instanceof Administrator)
 			requests = this.postService.findAllRequestsNotBanned();
-		else
+		else {
+
 			requests = this.postService.findAllRequests();
+
+			if (principal instanceof Customer) {
+
+				final Set<Post> requestAux = new HashSet<Post>();
+				requestAux.addAll(this.postService.findAllRequests());
+				requestAux.addAll(this.postService.findAllRequestByCustomer((Customer) principal));
+				requests = requestAux;
+			}
+		}
 
 		result = new ModelAndView("post/list");
 		result.addObject("requestURI", "post/listRequests.do");
@@ -82,7 +95,6 @@ public class PostController extends AbstractController {
 
 		return result;
 	}
-
 	@RequestMapping(value = "/listOffers", method = RequestMethod.GET)
 	public ModelAndView listOfferss() {
 		ModelAndView result;
@@ -95,8 +107,18 @@ public class PostController extends AbstractController {
 
 		if (principal instanceof Administrator)
 			offers = this.postService.findAllOffersNotBanned();
-		else
+		else {
+
 			offers = this.postService.findAllOffers();
+
+			if (principal instanceof Customer) {
+
+				final Set<Post> offerAux = new HashSet<Post>();
+				offerAux.addAll(this.postService.findAllOffers());
+				offerAux.addAll(this.postService.findAllOfferByCustomer((Customer) principal));
+				offers = offerAux;
+			}
+		}
 
 		result = new ModelAndView("post/list");
 		result.addObject("requestURI", "post/customer/listOffers.do");

@@ -78,7 +78,7 @@
 	
 	<spring:message code="comment.ban" var="banHeader"/>
 	<display:column title="${banHeader}">
-	<jstl:if test="${row.banned eq false}">
+	<jstl:if test="${row.banned eq false || row.banned == null}">
 		<a href="comment/administrator/ban.do?commentId=${row.id}"> ban</a>
 	</jstl:if>
 	</display:column>

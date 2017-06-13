@@ -18,7 +18,9 @@ import services.FolderService;
 import services.MessageService;
 import controllers.AbstractController;
 import domain.Actor;
+import domain.Folder;
 import domain.Message;
+import forms.ResendChirp;
 
 @Controller
 @RequestMapping("/message/actor")
@@ -50,12 +52,19 @@ public class MessageActorController extends AbstractController {
 		ModelAndView result;
 		Collection<Message> messages;
 		final String requestURI = "message/actor/list.do?folderId=" + folderId;
+		final Folder folder = this.folderService.findOne(folderId);
+
+		final ResendChirp resendChirp = new ResendChirp();
 
 		try {
 			messages = this.messageService.findAllByFolder(folderId);
 			result = new ModelAndView("message/list");
 			result.addObject("messages", messages);
 			result.addObject("requestURI", requestURI);
+			final Collection<Actor> actors = this.actorService.findAll();
+			result.addObject("resendChirp", resendChirp);
+			result.addObject("actors", actors);
+			result.addObject("folder", folder);
 		} catch (final Throwable oops) {
 
 			result = new ModelAndView("redirect:/folder/actor/list.do");
@@ -92,6 +101,41 @@ public class MessageActorController extends AbstractController {
 				result = new ModelAndView("redirect:/message/actor/list.do?folderId=" + this.folderService.findSystemFolder(principal, "Outbox").getId());
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(message, "message.commit.error");
+			}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/reply", method = RequestMethod.GET)
+	public ModelAndView reply(@RequestParam final int chirpId) {
+		ModelAndView result;
+		final Message chirp = this.messageService.findOne(chirpId);
+		final Message reply = this.messageService.reply(chirp);
+
+		result = this.createEditModelAndView(reply);
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/resend", method = RequestMethod.POST, params = "save")
+	public ModelAndView resend(@Valid final ResendChirp resendMessage, final BindingResult binding) {
+		Actor principal;
+		ModelAndView result;
+		Message sent;
+		final Actor recipient;
+
+		if (binding.hasErrors())
+			result = new ModelAndView("redirect:/welcome/index.do");
+		else
+			try {
+				recipient = this.actorService.findOne(resendMessage.getRecipientId());
+				sent = this.messageService.findOne(resendMessage.getChirpId());
+				sent = this.messageService.reSend(sent, recipient);
+				principal = this.actorService.findByPrincipal();
+				result = new ModelAndView("redirect:/chirp/chorbi/list.do?folderId=" + this.folderService.findSystemFolder(principal, "Sent").getId());
+			} catch (final Throwable oops) {
+				result = new ModelAndView("redirect:/welcome/index.do");
 			}
 
 		return result;

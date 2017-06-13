@@ -62,9 +62,9 @@ public class MessageService {
 
 		return result;
 	}
-	
+
 	public Collection<Message> findAll() {
-		return messageRepository.findAll();
+		return this.messageRepository.findAll();
 	}
 
 	public Collection<Message> findAllByFolder(final int folderId) {
@@ -73,7 +73,7 @@ public class MessageService {
 		result = this.messageRepository.findAllByFolderId(folderId);
 		return result;
 	}
-	
+
 	public Collection<Message> findAllByFolderWithNoCheck(final int folderId) {
 		Collection<Message> result;
 		result = this.messageRepository.findAllByFolderId(folderId);
@@ -129,10 +129,10 @@ public class MessageService {
 		result = this.messageRepository.save(message);
 		return result;
 	}
-	
+
 	public void flush() {
-		messageRepository.flush();
-		
+		this.messageRepository.flush();
+
 	}
 
 	// Principal Checkers
@@ -208,4 +208,29 @@ public class MessageService {
 		result = this.messageRepository.actorWithMoreReceivedMessages();
 		return result;
 	}
+
+	public Message reply(final Message chirp) {
+		final Message result;
+		result = this.create();
+		final Collection<String> attachments;
+		result.setAttachment(chirp.getAttachment());
+		result.setTitle("Re: " + chirp.getTitle());
+		result.setRecipient(chirp.getSender());
+
+		return result;
+	}
+
+	public Message reSend(final Message chirp, final Actor chorbi) {
+
+		Message result;
+		result = this.create();
+		result.setAttachment(chirp.getAttachment());
+		result.setTitle(chirp.getTitle());
+		result.setText(chirp.getText());
+		result.setRecipient(chorbi);
+		this.send(result);
+
+		return result;
+	}
+
 }

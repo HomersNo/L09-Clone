@@ -62,6 +62,34 @@
 		<a href="actor/actor/display.do?actorId=${row.recipient.id }">${row.recipient.name } ${row.recipient.surname }</a>
 	</display:column> 
 	
+	<jstl:if test="${folder.name eq 'Outbox'}">
+		<spring:message code="chirp.resend" var="resendHeader"/>
+		<display:column title="${resendHeader}">
+			<form:form action="message/actor/resend.do"
+				modelAttribute="resendChirp" >
+
+				<form:hidden path="chirpId" value="${row.id}" />
+
+				
+				<form:select id="actors" path="recipientId" >
+					<form:option value="0" label="----"/>
+					<jstl:forEach items="${actors}" var="actor">
+						<form:option value="${actor.id}" label="${actor.surname}, ${actor.name}" />
+					</jstl:forEach>
+				</form:select>
+				<form:errors cssClass="error" path="recipientId" />
+				<input type="submit" name="save"
+					value="<spring:message code="chirp.resend" />" />&nbsp;
+			</form:form>
+		</display:column>
+	</jstl:if>
+	<jstl:if test="${folder.name eq 'Inbox' }">
+		<spring:message code="chirp.reply" var="replyHeader"/>
+		<display:column title="${replyHeader}">
+			<a href="message/actor/reply.do?chirpId=${row.id }"><spring:message code="chirp.reply"/></a>
+		</display:column>
+	</jstl:if>
+	
 
 </display:table>
 

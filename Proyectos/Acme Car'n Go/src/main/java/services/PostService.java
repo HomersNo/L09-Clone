@@ -113,6 +113,8 @@ public class PostService {
 	public Post save(final Post post) {
 		Assert.notNull(post);
 		Assert.isTrue(post.getMoment().after(new Date()));
+		Assert.isTrue(((post.getOrigin().getLatitude() == null && post.getOrigin().getLongitude() == null) || (post.getOrigin().getLatitude() != null && post.getOrigin().getLongitude() != null))
+			&& ((post.getDestination().getLatitude() == null && post.getDestination().getLongitude() == null) || (post.getDestination().getLatitude() != null && post.getDestination().getLongitude() != null)));
 		this.checkPrincipal(post);
 
 		Post result;

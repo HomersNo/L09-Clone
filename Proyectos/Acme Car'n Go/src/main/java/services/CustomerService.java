@@ -79,6 +79,7 @@ public class CustomerService {
 
 	public Customer save(final Customer customer) {
 		Assert.notNull(customer);
+		Assert.isTrue(this.findByPrincipal().getId() == customer.getId());
 
 		Customer result;
 

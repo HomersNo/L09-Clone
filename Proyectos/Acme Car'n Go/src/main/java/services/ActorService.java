@@ -91,6 +91,7 @@ public class ActorService {
 	public Actor save(final Actor actor) {
 		Assert.notNull(actor);
 		Actor result;
+		Assert.isTrue(this.findByPrincipal().getId() == actor.getId());
 		if (actor instanceof Administrator)
 			result = this.administratorService.save((Administrator) actor);
 		else

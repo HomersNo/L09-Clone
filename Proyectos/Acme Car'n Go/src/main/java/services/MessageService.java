@@ -216,6 +216,7 @@ public class MessageService {
 		result.setAttachment(chirp.getAttachment());
 		result.setTitle("Re: " + chirp.getTitle());
 		result.setRecipient(chirp.getSender());
+		result.setSender(chirp.getRecipient());
 
 		return result;
 	}

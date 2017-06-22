@@ -69,7 +69,7 @@ public class CommentService {
 	}
 
 	public Comment save(final Comment comment) {
-
+		Assert.isTrue(this.actorService.findByPrincipal().getId() == comment.getActor().getId());
 		Comment saved;
 		final Date moment = new Date(System.currentTimeMillis() - 100);
 		comment.setMoment(moment);
@@ -136,7 +136,7 @@ public class CommentService {
 		Comment result;
 
 		comment.setBanned(true);
-		result = this.save(comment);
+		result = this.commentRepository.save(comment);
 
 		return result;
 	}

@@ -56,7 +56,6 @@ public class AdministratorService {
 	//Business Methods
 	public void checkAdministrator() {
 		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
 		Boolean checker = false;
 		userAccount = LoginService.getPrincipal();
 		for (final Authority a : userAccount.getAuthorities())
@@ -69,6 +68,7 @@ public class AdministratorService {
 
 	public Administrator save(final Administrator administrator) {
 		Administrator result;
+		this.checkAdministrator();
 		result = this.administratorRepository.save(administrator);
 		return result;
 	}

@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -31,6 +32,7 @@ public class Application extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml
 	@Pattern(regexp = "^(ACCEPTED|PENDING|DENIED)$")
 	public String getStatus() {
 		return this.status;

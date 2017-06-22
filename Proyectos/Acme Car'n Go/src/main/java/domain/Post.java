@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -40,6 +41,7 @@ public class Post extends Commentable {
 
 
 	@NotBlank
+	@SafeHtml
 	public String getTitle() {
 		return this.title;
 	}
@@ -49,6 +51,7 @@ public class Post extends Commentable {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return this.description;
 	}
@@ -68,6 +71,7 @@ public class Post extends Commentable {
 	}
 
 	@NotBlank
+	@SafeHtml
 	@Pattern(regexp = "^(REQUEST|OFFER)$")
 	public String getType() {
 		return this.type;

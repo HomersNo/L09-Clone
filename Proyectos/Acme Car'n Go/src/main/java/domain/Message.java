@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -40,6 +41,7 @@ public class Message extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml
 	public String getTitle() {
 		return this.title;
 	}
@@ -48,6 +50,7 @@ public class Message extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getText() {
 		return this.text;
 	}
@@ -66,6 +69,7 @@ public class Message extends DomainEntity {
 	}
 
 	@URL
+	@SafeHtml
 	public String getAttachment() {
 		return this.attachment;
 	}

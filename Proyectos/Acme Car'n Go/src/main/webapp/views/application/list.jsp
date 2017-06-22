@@ -28,7 +28,7 @@
 
 	<spring:message code="application.post" var="postHeader" />
 	<display:column  title="${postHeader}" sortable="false" >
-		<a href="post/customer/display.do?postId=${row.post.id}" ><jstl:out value="${row.post.title}" /></a>
+		<a href="post/display.do?postId=${row.post.id}" ><jstl:out value="${row.post.title}" /></a>
 	</display:column>
 
 	<spring:message code="application.customer" var="customerHeader" />

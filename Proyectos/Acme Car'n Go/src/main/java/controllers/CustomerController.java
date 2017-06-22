@@ -77,9 +77,10 @@ public class CustomerController extends AbstractController {
 		Customer customer;
 
 		customer = this.customerService.reconstruct(registerCustomer, binding);
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
+			registerCustomer.setAccept(false);
 			result = this.createEditModelAndView(registerCustomer);
-		else
+		} else
 			try {
 				customer = this.customerService.register(customer);
 				result = new ModelAndView("redirect:/security/login.do");
